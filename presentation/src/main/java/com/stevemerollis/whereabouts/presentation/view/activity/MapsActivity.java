@@ -10,8 +10,10 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.stevemerollis.whereabouts.presentation.R;
+import com.stevemerollis.whereabouts.presentation.adapter.PlaceInfoWindowAdapter;
 import com.stevemerollis.whereabouts.presentation.di.HasComponent;
 import com.stevemerollis.whereabouts.presentation.di.components.DaggerPlaceComponent;
 import com.stevemerollis.whereabouts.presentation.di.components.PlaceComponent;
@@ -58,6 +60,7 @@ public class MapsActivity extends BaseActivity implements HasComponent<PlaceComp
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setInfoWindowAdapter(new PlaceInfoWindowAdapter(this));
         WhereaboutsMapFragment mapsFragment = (WhereaboutsMapFragment) getFragmentManager().findFragmentById(R.id.map);
         mapsFragment.loadPlaces();
     }

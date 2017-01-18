@@ -73,7 +73,7 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
                     .position(latLng)
                     .icon(BitmapDescriptorFactory.defaultMarker(model.getMarkerColor()))
                     .title(String.format(Locale.getDefault(), "%s : %s", model.getName(), model.getVicinity()));
-            map.addMarker(options);
+            map.addMarker(options).setTag(model);
         }
     }
 
