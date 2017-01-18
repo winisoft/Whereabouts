@@ -30,6 +30,9 @@ public class PlaceEntity {
     @SerializedName("types")
     public List<String> types;
 
+    @SerializedName("vicinity")
+    public String vicinity;
+
     @SerializedName("whereaboutsComments")
     public String whereaboutsComments;
 

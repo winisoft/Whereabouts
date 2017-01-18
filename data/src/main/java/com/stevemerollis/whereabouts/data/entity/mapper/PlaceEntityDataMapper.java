@@ -27,6 +27,7 @@ public class PlaceEntityDataMapper {
             place.setOpenNow(placeEntity.openNow);
             place.setGooglePlaceId(placeEntity.googlePlaceId);
             place.setTypes(placeEntity.types);
+            place.setVicinity(placeEntity.vicinity);
             place.setWhereaboutsComments(placeEntity.whereaboutsComments);
             place.setWhereaboutsRating(placeEntity.whereaboutsRating);
             place.setHaveVisited(placeEntity.whereaboutsHaveVisited);

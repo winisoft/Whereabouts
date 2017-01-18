@@ -15,6 +15,7 @@ public class Place {
     private boolean openNow;
     private String googlePlaceId;
     private List<String> types;
+    private String vicinity;
     private String whereaboutsComments;
     private double whereaboutsRating;
     private boolean whereaboutsHaveVisited;
@@ -82,6 +83,10 @@ public class Place {
     public void setTypes(List<String> types) {
         this.types = types;
     }
+
+    public String getVicinity(){ return vicinity; }
+
+    public void setVicinity(String vicinity){ this.vicinity = vicinity; }
 
     public String getWhereaboutsComments() {
         return whereaboutsComments;

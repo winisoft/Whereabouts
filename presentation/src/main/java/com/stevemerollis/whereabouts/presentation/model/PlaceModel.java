@@ -17,6 +17,7 @@ public class PlaceModel {
     private boolean openNow;
     private String googlePlaceId;
     private List<String> types;
+    private String vicinity;
     private String whereaboutsComments;
     private double whereaboutsRating;
     private boolean whereaboutsHaveVisited;
@@ -48,6 +49,8 @@ public class PlaceModel {
     public void setTypes(List<String> types) {
         this.types = types;
     }
+
+    public void setVicinity(String vicinity){ this.vicinity = vicinity; }
 
     public void setWhereaboutsComments(String whereaboutsComments) {
         this.whereaboutsComments = whereaboutsComments;
@@ -106,4 +109,6 @@ public class PlaceModel {
     }
 
     public boolean getHaveVisited(){ return whereaboutsHaveVisited; }
+
+    public String getVicinity(){ return vicinity; }
 }
