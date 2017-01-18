@@ -1,6 +1,5 @@
 package com.stevemerollis.whereabouts.presentation.view.fragment;
 
-import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
 import android.os.Bundle;
@@ -8,6 +7,7 @@ import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.stevemerollis.whereabouts.presentation.di.components.PlaceComponent;
@@ -17,6 +17,7 @@ import com.stevemerollis.whereabouts.presentation.view.PlacesView;
 import com.stevemerollis.whereabouts.presentation.view.activity.MapsActivity;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -35,9 +36,6 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.placesPresenter.setView(this);
-        /*if (savedInstanceState == null) {
-            this.loadPlaces();
-        }*/
     }
 
     @Override public void onResume() {
@@ -71,7 +69,10 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
 
         for(PlaceModel model : placeModelCollection){
             LatLng latLng = new LatLng(model.getLatitude(), model.getLongitude());
-            MarkerOptions options = new MarkerOptions().position(latLng);
+            MarkerOptions options = new MarkerOptions()
+                    .position(latLng)
+                    .icon(BitmapDescriptorFactory.defaultMarker(model.getMarkerColor()))
+                    .title(String.format(Locale.getDefault(), "%s : %s", model.getName(), model.getVicinity()));
             map.addMarker(options);
         }
     }

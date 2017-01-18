@@ -1,5 +1,7 @@
 package com.stevemerollis.whereabouts.presentation.model;
 
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
@@ -111,4 +113,12 @@ public class PlaceModel {
     public boolean getHaveVisited(){ return whereaboutsHaveVisited; }
 
     public String getVicinity(){ return vicinity; }
+
+    public float getMarkerColor(){
+        if (!whereaboutsHaveVisited) return BitmapDescriptorFactory.HUE_CYAN;
+        if (whereaboutsRating < 2.0) return BitmapDescriptorFactory.HUE_YELLOW;
+        if (whereaboutsRating < 3.0) return BitmapDescriptorFactory.HUE_ORANGE;
+        if (whereaboutsRating < 4.0) return BitmapDescriptorFactory.HUE_RED;
+        return BitmapDescriptorFactory.HUE_VIOLET;
+    }
 }
