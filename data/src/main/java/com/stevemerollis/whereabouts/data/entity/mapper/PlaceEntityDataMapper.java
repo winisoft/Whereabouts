@@ -17,7 +17,6 @@ public class PlaceEntityDataMapper {
     public Place transform(PlaceEntity placeEntity){
         Place place = null;
 
-
         if (placeEntity != null){
             place = new Place();
             place.setLatitude(placeEntity.latitude);
@@ -30,6 +29,7 @@ public class PlaceEntityDataMapper {
             place.setTypes(placeEntity.types);
             place.setWhereaboutsComments(placeEntity.whereaboutsComments);
             place.setWhereaboutsRating(placeEntity.whereaboutsRating);
+            place.setHaveVisited(placeEntity.whereaboutsHaveVisited);
         }
 
         return place;

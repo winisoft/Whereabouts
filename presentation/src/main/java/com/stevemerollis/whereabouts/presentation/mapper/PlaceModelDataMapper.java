@@ -42,6 +42,7 @@ public class PlaceModelDataMapper {
         placeModel.setTypes(place.getTypes());
         placeModel.setWhereaboutsComments(place.getWhereaboutsComments());
         placeModel.setWhereaboutsRating(place.getWhereaboutsRating());
+        placeModel.setWhereaboutsHaveVisited(place.getHaveVisited());
 
         return placeModel;
     }

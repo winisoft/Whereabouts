@@ -6,6 +6,19 @@ import java.util.List;
  * Class that represents a Place in the domain layer.
  */
 public class Place {
+
+    private double latitude;
+    private double longitude;
+    private String icon;
+    private String googleId;
+    private String name;
+    private boolean openNow;
+    private String googlePlaceId;
+    private List<String> types;
+    private String whereaboutsComments;
+    private double whereaboutsRating;
+    private boolean whereaboutsHaveVisited;
+
     public double getLatitude() {
         return latitude;
     }
@@ -86,23 +99,9 @@ public class Place {
         this.whereaboutsRating = whereaboutsRating;
     }
 
-    private double latitude;
+    public boolean getHaveVisited(){ return whereaboutsHaveVisited; }
 
-    private double longitude;
-
-    private String icon;
-
-    private String googleId;
-
-    private String name;
-
-    private boolean openNow;
-
-    private String googlePlaceId;
-
-    private List<String> types;
-
-    private String whereaboutsComments;
-
-    private double whereaboutsRating;
+    public void setHaveVisited(boolean haveVisited){
+        this.whereaboutsHaveVisited = haveVisited;
+    }
 }

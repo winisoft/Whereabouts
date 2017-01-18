@@ -36,5 +36,6 @@ public class PlaceEntity {
     @SerializedName("whereaboutsRating")
     public double whereaboutsRating;
 
-
+    @SerializedName("whereaboutsHaveVisited")
+    public boolean whereaboutsHaveVisited;
 }

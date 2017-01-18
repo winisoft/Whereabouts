@@ -10,24 +10,16 @@ import java.util.List;
 public class PlaceModel {
 
     private double latitude;
-
     private double longitude;
-
     private String icon;
-
     private String googleId;
-
     private String name;
-
     private boolean openNow;
-
     private String googlePlaceId;
-
     private List<String> types;
-
     private String whereaboutsComments;
-
     private double whereaboutsRating;
+    private boolean whereaboutsHaveVisited;
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
@@ -69,6 +61,10 @@ public class PlaceModel {
         this.latitude = latitude;
     }
 
+    public void setWhereaboutsHaveVisited(boolean haveVisited){
+        this.whereaboutsHaveVisited = haveVisited;
+    }
+
     public double getLatitude() {
         return latitude;
     }
@@ -108,4 +104,6 @@ public class PlaceModel {
     public double getWhereaboutsRating() {
         return whereaboutsRating;
     }
+
+    public boolean getHaveVisited(){ return whereaboutsHaveVisited; }
 }
