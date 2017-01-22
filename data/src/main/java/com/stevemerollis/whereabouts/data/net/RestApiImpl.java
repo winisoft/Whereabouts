@@ -79,7 +79,7 @@ public class RestApiImpl implements RestApi {
                         emitter.onError(new NetworkConnectionException());
                     }
                 } catch (Exception e) {
-                    emitter.onError(new NetworkConnectionException(e.getCause()));
+                    emitter.onError(e);
                 }
             } else {
                 emitter.onError(new NetworkConnectionException());

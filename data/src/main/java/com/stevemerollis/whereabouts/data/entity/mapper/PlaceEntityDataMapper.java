@@ -9,11 +9,21 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+/**
+ * Mapper class used to transform {@link PlaceEntity} in the data layer to {@link Place} in the
+ * domain layer.
+ */
 public class PlaceEntityDataMapper {
 
     @Inject
     PlaceEntityDataMapper(){}
 
+    /**
+     * Transform a {@link PlaceEntity} into an {@link Place}.
+     *
+     * @param placeEntity Object to be transformed.
+     * @return {@link Place}, provided a valid {@link PlaceEntity}, otherwise null.
+     */
     public Place transform(PlaceEntity placeEntity){
         Place place = null;
 

@@ -51,8 +51,6 @@ public class PlacesPresenter implements Presenter,
     public PlacesPresenter(GetPlaces getPlacesUseCase, PlaceModelDataMapper placeModelDataMapper){
         this.getPlacesUseCase = getPlacesUseCase;
         this.placeModelDataMapper = placeModelDataMapper;
-
-
     }
 
     public void setView(@NonNull PlacesView placesView){
