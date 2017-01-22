@@ -94,7 +94,7 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
 
     @Override
     public Context context() {
-        return this.getActivity().getApplicationContext();
+        return this.getActivity();
     }
 
     @Override
