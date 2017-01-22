@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -26,7 +27,9 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
     @Inject
     PlacesPresenter placesPresenter;
 
-    public WhereaboutsMapFragment(){ setRetainInstance(true); }
+    public WhereaboutsMapFragment(){
+        setRetainInstance(true);
+    }
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,19 +41,32 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
         this.placesPresenter.setView(this);
     }
 
+    @Override public void onStart() {
+        super.onStart();
+        if (placesPresenter != null){
+            this.placesPresenter.start();
+        }
+    }
+
     @Override public void onResume() {
         super.onResume();
-        this.placesPresenter.resume();
+        if (placesPresenter != null){
+            this.placesPresenter.resume();
+        }
     }
 
     @Override public void onPause() {
         super.onPause();
-        this.placesPresenter.pause();
+        if (placesPresenter != null){
+            this.placesPresenter.pause();
+        }
     }
 
     @Override public void onDestroy() {
         super.onDestroy();
-        this.placesPresenter.destroy();
+        if (placesPresenter != null){
+            this.placesPresenter.destroy();
+        }
     }
 
     @Override public void onDetach() {
@@ -58,55 +74,30 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
         this.placesPresenter = null;
     }
 
-    public void loadPlaces() {
-        this.placesPresenter.initialize();
-    }
-
     @Override
     public void plotPlaceModels(Collection<PlaceModel> placeModelCollection) {
-
-        GoogleMap map = ((MapsActivity)getActivity()).getMap();
-
         for(PlaceModel model : placeModelCollection){
             LatLng latLng = new LatLng(model.getLatitude(), model.getLongitude());
             MarkerOptions options = new MarkerOptions()
                     .position(latLng)
                     .icon(BitmapDescriptorFactory.defaultMarker(model.getMarkerColor()))
                     .title(String.format(Locale.getDefault(), "%s : %s", model.getName(), model.getVicinity()));
-            map.addMarker(options).setTag(model);
+            placesPresenter.getMap().addMarker(options).setTag(model);
         }
     }
 
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showRetry() {
-
-    }
-
-    @Override
-    public void hideRetry() {
-
-    }
-
-    @Override
-    public void showError(String message) {
-
-    }
+    @Override public void showLoading() {}
+    @Override public void hideLoading() {}
+    @Override public void showRetry() {}
+    @Override public void hideRetry() {}
+    @Override public void showError(String message) {}
 
     @Override
     public Context context() {
         return this.getActivity().getApplicationContext();
     }
 
+    @Override
     public void initMapPosition(GoogleMap googleMap, Location lastLocation){
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()), 13));
     }

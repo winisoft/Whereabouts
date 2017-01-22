@@ -9,7 +9,7 @@ import dagger.Component;
 
 /**
  * A scope {@link PerActivity} component.
- * Injects user specific Fragments.
+ * Injects fragments used as part of the places functionality.
  */
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, PlaceModule.class})

@@ -1,5 +1,9 @@
 package com.stevemerollis.whereabouts.presentation.view;
 
+import android.location.Location;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
 import com.stevemerollis.whereabouts.presentation.model.PlaceModel;
 
 import java.util.Collection;
@@ -16,4 +20,6 @@ public interface PlacesView extends LoadDataView {
      * @param placeModelCollection The collection of {@link PlaceModel} that will be shown.
      */
     void plotPlaceModels(Collection<PlaceModel> placeModelCollection);
+
+    void initMapPosition(GoogleMap map, Location lastLocation);
 }

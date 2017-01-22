@@ -19,71 +19,21 @@ import com.stevemerollis.whereabouts.presentation.di.components.DaggerPlaceCompo
 import com.stevemerollis.whereabouts.presentation.di.components.PlaceComponent;
 import com.stevemerollis.whereabouts.presentation.view.fragment.WhereaboutsMapFragment;
 
-public class MapsActivity extends BaseActivity implements HasComponent<PlaceComponent>,
-        OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class MapsActivity extends BaseActivity implements HasComponent<PlaceComponent> {
 
     private PlaceComponent placeComponent;
-    private GoogleMap mMap;
-    private GoogleApiClient mGoogleApiClient;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        this.initializeInjector();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
-        if (mGoogleApiClient == null) {
-            mGoogleApiClient = new GoogleApiClient.Builder(this)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
+        this.initializeInjector();
+
+        if (savedInstanceState == null){
+            addFragment(R.id.fragmentContainer, new WhereaboutsMapFragment());
         }
-
-        WhereaboutsMapFragment mapsFragment = (WhereaboutsMapFragment) getFragmentManager().findFragmentById(R.id.map);
-        mapsFragment.getMapAsync(this);
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mGoogleApiClient.connect();
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mGoogleApiClient.disconnect();
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.setInfoWindowAdapter(new PlaceInfoWindowAdapter(this));
-        WhereaboutsMapFragment mapsFragment = (WhereaboutsMapFragment) getFragmentManager().findFragmentById(R.id.map);
-        mapsFragment.loadPlaces();
-    }
-
-    @Override
-    public void onConnected(@Nullable Bundle bundle) {
-        try{
-            Location lastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            if (lastLocation != null) {
-                WhereaboutsMapFragment mapsFragment = (WhereaboutsMapFragment) getFragmentManager().findFragmentById(R.id.map);
-                mapsFragment.initMapPosition(mMap, lastLocation);
-            }
-        } catch (SecurityException e){}
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
     }
 
     @Override
@@ -96,9 +46,5 @@ public class MapsActivity extends BaseActivity implements HasComponent<PlaceComp
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build();
-    }
-
-    public GoogleMap getMap(){
-        return this.mMap;
     }
 }
