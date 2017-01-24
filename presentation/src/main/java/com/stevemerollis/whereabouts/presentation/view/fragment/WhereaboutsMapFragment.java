@@ -22,6 +22,9 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
+/**
+ * Fragment that shows the Google Map with plotted places.
+ */
 public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesView {
 
     @Inject

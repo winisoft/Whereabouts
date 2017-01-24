@@ -33,7 +33,7 @@ public class PlaceInfoWindowAdapter implements GoogleMap.InfoWindowAdapter{
 
         TextView tvName = (TextView) v.findViewById(R.id.tv_place_name);
         TextView tvVicinity = (TextView) v.findViewById(R.id.tv_place_vicinity);
-        RatingBar rbWhereaboutsRating = (RatingBar) v.findViewById(R.id.rb_wherabouts_rating);
+        RatingBar rbWhereaboutsRating = (RatingBar) v.findViewById(R.id.rb_whereabouts_rating);
         TextView tvComments = (TextView) v.findViewById(R.id.tv_place_comments);
 
         tvName.setText(place.getName());

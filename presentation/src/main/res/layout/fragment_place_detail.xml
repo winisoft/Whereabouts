@@ -14,12 +14,13 @@
         android:id="@+id/tv_place_vicinity" />
 
     <RatingBar
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rb_wherabouts_rating"
+        android:id="@+id/rb_whereabouts_rating"
         android:longClickable="false"
         android:numStars="@integer/maxRating"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        style="@style/Widget.AppCompat.RatingBar" />
 
     <TextView
         android:text="TextView"

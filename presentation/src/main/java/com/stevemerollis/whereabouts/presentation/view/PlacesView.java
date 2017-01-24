@@ -21,5 +21,10 @@ public interface PlacesView extends LoadDataView {
      */
     void plotPlaceModels(Collection<PlaceModel> placeModelCollection);
 
+    /**
+     * Zoom the map into the provided location
+     * @param map The Google Map
+     * @param lastLocation
+     */
     void initMapPosition(GoogleMap map, Location lastLocation);
 }
