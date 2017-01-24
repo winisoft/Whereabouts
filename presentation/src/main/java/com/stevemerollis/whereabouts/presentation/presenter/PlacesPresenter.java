@@ -24,6 +24,7 @@ import com.stevemerollis.whereabouts.presentation.di.PerActivity;
 import com.stevemerollis.whereabouts.presentation.exception.ErrorMessageFactory;
 import com.stevemerollis.whereabouts.presentation.mapper.PlaceModelDataMapper;
 import com.stevemerollis.whereabouts.presentation.model.PlaceModel;
+import com.stevemerollis.whereabouts.presentation.util.ResourcesUtil;
 import com.stevemerollis.whereabouts.presentation.view.PlacesView;
 import com.stevemerollis.whereabouts.presentation.view.fragment.WhereaboutsMapFragment;
 
@@ -47,7 +48,6 @@ public class PlacesPresenter implements Presenter,
     private final PlaceModelDataMapper placeModelDataMapper;
     private GoogleMap mMap;
     private GoogleApiClient mGoogleApiClient;
-    private Location mLastLocation;
 
     @Inject
     public PlacesPresenter(GetPlaces getPlacesUseCase, PlaceModelDataMapper placeModelDataMapper){
@@ -136,12 +136,10 @@ public class PlacesPresenter implements Presenter,
     @Override
     public void onConnected(@Nullable Bundle bundle) {
         try{
-            mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
             LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
 
-            TypedValue outValue = new TypedValue();
-            placesView.context().getResources().getValue(R.dimen.default_map_zoom, outValue, true);
-            float z = outValue.getFloat();
+            float z = ResourcesUtil.getFloat(placesView.context(), R.dimen.default_map_zoom);
 
             placesView.initMapPosition(mMap, latLng, z);
         } catch (SecurityException e){}
