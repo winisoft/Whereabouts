@@ -78,6 +78,12 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
         this.placesPresenter = null;
     }
 
+
+    @Override
+    public void initMapPosition(GoogleMap googleMap, LatLng latLng, float z){
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
+    }
+
     @Override
     public void plotPlaceModels(Collection<PlaceModel> placeModelCollection) {
         for(PlaceModel model : placeModelCollection){
@@ -99,12 +105,5 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
     @Override
     public Context context() {
         return this.getActivity();
-    }
-
-    @Override
-    public void initMapPosition(GoogleMap googleMap, Location lastLocation){
-        LatLng latLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
-        float z = getResources().getDimension(R.dimen.default_map_zoom);
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
     }
 }

@@ -4,12 +4,14 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.TypedValue;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.stevemerollis.whereabouts.domain.Place;
 import com.stevemerollis.whereabouts.domain.PlaceRequestParams;
 import com.stevemerollis.whereabouts.domain.exception.DefaultErrorBundle;
@@ -135,7 +137,13 @@ public class PlacesPresenter implements Presenter,
     public void onConnected(@Nullable Bundle bundle) {
         try{
             mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
-            placesView.initMapPosition(mMap, mLastLocation);
+            LatLng latLng = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+
+            TypedValue outValue = new TypedValue();
+            placesView.context().getResources().getValue(R.dimen.default_map_zoom, outValue, true);
+            float z = outValue.getFloat();
+
+            placesView.initMapPosition(mMap, latLng, z);
         } catch (SecurityException e){}
 
         loadPlaces();

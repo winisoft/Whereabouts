@@ -4,6 +4,7 @@ import android.location.Location;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
 import com.stevemerollis.whereabouts.presentation.model.PlaceModel;
 
 import java.util.Collection;
@@ -23,8 +24,9 @@ public interface PlacesView extends LoadDataView {
 
     /**
      * Zoom the map into the provided location
-     * @param map The Google Map
-     * @param lastLocation
+     * @param map The Google Map the user is viewing
+     * @param latLng a LatLng object representing the coordinates we are focusing on
+     * @param z The height from which we will view the map
      */
-    void initMapPosition(GoogleMap map, Location lastLocation);
+    void initMapPosition(GoogleMap map, LatLng latLng, float z);
 }
