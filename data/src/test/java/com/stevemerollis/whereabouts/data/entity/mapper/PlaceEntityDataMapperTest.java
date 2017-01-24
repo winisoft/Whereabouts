@@ -59,8 +59,7 @@ public class PlaceEntityDataMapperTest {
 
     @Test
     public void testTransformNullEntityReturnsNull() {
-        PlaceEntity placeEntity = null;
-        Place place = placeEntityDataMapper.transform(placeEntity);
+        Place place = placeEntityDataMapper.transform((PlaceEntity) null);
 
         assertThat(place, is(nullValue()));
     }
