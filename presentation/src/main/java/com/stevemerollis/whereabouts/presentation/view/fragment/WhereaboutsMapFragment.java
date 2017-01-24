@@ -11,6 +11,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.stevemerollis.whereabouts.presentation.R;
 import com.stevemerollis.whereabouts.presentation.di.components.PlaceComponent;
 import com.stevemerollis.whereabouts.presentation.model.PlaceModel;
 import com.stevemerollis.whereabouts.presentation.presenter.PlacesPresenter;
@@ -102,6 +103,8 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
 
     @Override
     public void initMapPosition(GoogleMap googleMap, Location lastLocation){
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()), 13));
+        LatLng latLng = new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude());
+        float z = getResources().getDimension(R.dimen.default_map_zoom);
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
     }
 }
