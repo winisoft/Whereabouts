@@ -1,8 +1,6 @@
 package com.stevemerollis.whereabouts.presentation.model;
 
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 

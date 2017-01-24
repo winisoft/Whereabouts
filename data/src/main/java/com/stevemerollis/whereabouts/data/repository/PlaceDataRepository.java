@@ -1,6 +1,5 @@
 package com.stevemerollis.whereabouts.data.repository;
 
-import com.stevemerollis.whereabouts.data.entity.PlaceEntity;
 import com.stevemerollis.whereabouts.data.entity.mapper.PlaceEntityDataMapper;
 import com.stevemerollis.whereabouts.data.repository.datasource.PlaceDataStore;
 import com.stevemerollis.whereabouts.data.repository.datasource.PlaceDataStoreFactory;

@@ -19,7 +19,6 @@ import java.util.List;
 import io.reactivex.Observable;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.anyInt;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)

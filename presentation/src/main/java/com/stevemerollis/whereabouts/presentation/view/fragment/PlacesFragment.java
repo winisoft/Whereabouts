@@ -1,22 +1,18 @@
 package com.stevemerollis.whereabouts.presentation.view.fragment;
 
 import android.content.Context;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.stevemerollis.whereabouts.presentation.R;
 import com.stevemerollis.whereabouts.presentation.di.components.PlaceComponent;
 import com.stevemerollis.whereabouts.presentation.model.PlaceModel;
 import com.stevemerollis.whereabouts.presentation.presenter.PlacesPresenter;
 import com.stevemerollis.whereabouts.presentation.view.PlacesView;
-import com.stevemerollis.whereabouts.presentation.view.activity.MapsActivity;
 
 import java.util.Collection;
 import java.util.Locale;
