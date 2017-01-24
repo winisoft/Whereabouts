@@ -26,12 +26,12 @@ import javax.inject.Inject;
 /**
  * Fragment that shows the Google Map with plotted places.
  */
-public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesView {
+public class PlacesFragment extends BaseMapFragment implements PlacesView {
 
     @Inject
     PlacesPresenter placesPresenter;
 
-    public WhereaboutsMapFragment(){
+    public PlacesFragment(){
         setRetainInstance(true);
     }
 

@@ -4,7 +4,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.TypedValue;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -26,7 +25,7 @@ import com.stevemerollis.whereabouts.presentation.mapper.PlaceModelDataMapper;
 import com.stevemerollis.whereabouts.presentation.model.PlaceModel;
 import com.stevemerollis.whereabouts.presentation.util.ResourcesUtil;
 import com.stevemerollis.whereabouts.presentation.view.PlacesView;
-import com.stevemerollis.whereabouts.presentation.view.fragment.WhereaboutsMapFragment;
+import com.stevemerollis.whereabouts.presentation.view.fragment.PlacesFragment;
 
 import java.util.Collection;
 import java.util.List;
@@ -66,7 +65,7 @@ public class PlacesPresenter implements Presenter,
                     .build();
         }
 
-        ((WhereaboutsMapFragment)this.placesView).getMapAsync(this);
+        ((PlacesFragment)this.placesView).getMapAsync(this);
     }
 
     @Override
