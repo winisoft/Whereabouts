@@ -56,11 +56,11 @@ public class RestApiImpl implements RestApi {
 
     private String getFromApi(PlaceRequestParams params) throws MalformedURLException {
         StringBuilder apiUrl = new StringBuilder(API_PLACE_URL);
-        apiUrl.append("location=" + params.getLatitude() + "," + params.getLongitude());
-        apiUrl.append("&radius=" + params.getProximityRadius());
-        apiUrl.append("&type=" + params.getEstablishmentType());
+        apiUrl.append("location=").append(params.getLatitude()).append(",").append(params.getLongitude());
+        apiUrl.append("&radius=").append(params.getProximityRadius());
+        apiUrl.append("&type=").append(params.getEstablishmentType());
         apiUrl.append("&sensor=true");
-        apiUrl.append("&key=" + context.getString(R.string.google_place_api_key));
+        apiUrl.append("&key=").append(context.getString(R.string.google_place_api_key));
         return ApiConnection.createGET(apiUrl.toString()).requestSyncCall();
     }
 
