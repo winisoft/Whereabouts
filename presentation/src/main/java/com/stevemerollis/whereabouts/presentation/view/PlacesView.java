@@ -1,5 +1,7 @@
 package com.stevemerollis.whereabouts.presentation.view;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
 import com.stevemerollis.whereabouts.presentation.model.PlaceModel;
 
 import java.util.Collection;
@@ -17,4 +19,12 @@ public interface PlacesView extends LoadDataView {
      * @param placeModelCollection The collection of {@link PlaceModel} that will be shown.
      */
     void plotPlaceModels(Collection<PlaceModel> placeModelCollection);
+
+    /**
+     * Zoom the map into the provided location
+     * @param map The Google Map the user is viewing
+     * @param latLng a LatLng object representing the coordinates we are focusing on
+     * @param z The height from which we will view the map
+     */
+    void initMapPosition(GoogleMap map, LatLng latLng, float z);
 }

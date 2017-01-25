@@ -1,31 +1,35 @@
 package com.stevemerollis.whereabouts.presentation.view.fragment;
 
-import android.app.Activity;
 import android.content.Context;
-import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.stevemerollis.whereabouts.presentation.di.components.PlaceComponent;
 import com.stevemerollis.whereabouts.presentation.model.PlaceModel;
 import com.stevemerollis.whereabouts.presentation.presenter.PlacesPresenter;
 import com.stevemerollis.whereabouts.presentation.view.PlacesView;
-import com.stevemerollis.whereabouts.presentation.view.activity.MapsActivity;
 
 import java.util.Collection;
+import java.util.Locale;
 
 import javax.inject.Inject;
 
-public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesView {
+/**
+ * Fragment that shows the Google Map with plotted places.
+ */
+public class PlacesFragment extends BaseMapFragment implements PlacesView {
 
     @Inject
     PlacesPresenter placesPresenter;
 
-    public WhereaboutsMapFragment(){ setRetainInstance(true); }
+    public PlacesFragment(){
+        setRetainInstance(true);
+    }
 
     @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,24 +39,34 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.placesPresenter.setView(this);
-        /*if (savedInstanceState == null) {
-            this.loadPlaces();
-        }*/
+    }
+
+    @Override public void onStart() {
+        super.onStart();
+        if (placesPresenter != null){
+            this.placesPresenter.start();
+        }
     }
 
     @Override public void onResume() {
         super.onResume();
-        this.placesPresenter.resume();
+        if (placesPresenter != null){
+            this.placesPresenter.resume();
+        }
     }
 
     @Override public void onPause() {
         super.onPause();
-        this.placesPresenter.pause();
+        if (placesPresenter != null){
+            this.placesPresenter.pause();
+        }
     }
 
     @Override public void onDestroy() {
         super.onDestroy();
-        this.placesPresenter.destroy();
+        if (placesPresenter != null){
+            this.placesPresenter.destroy();
+        }
     }
 
     @Override public void onDetach() {
@@ -60,53 +74,32 @@ public class WhereaboutsMapFragment extends BaseMapFragment implements PlacesVie
         this.placesPresenter = null;
     }
 
-    public void loadPlaces() {
-        this.placesPresenter.initialize();
+
+    @Override
+    public void initMapPosition(GoogleMap googleMap, LatLng latLng, float z){
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, z));
     }
 
     @Override
     public void plotPlaceModels(Collection<PlaceModel> placeModelCollection) {
-
-        GoogleMap map = ((MapsActivity)getActivity()).getMap();
-
         for(PlaceModel model : placeModelCollection){
             LatLng latLng = new LatLng(model.getLatitude(), model.getLongitude());
-            MarkerOptions options = new MarkerOptions().position(latLng);
-            map.addMarker(options);
+            MarkerOptions options = new MarkerOptions()
+                    .position(latLng)
+                    .icon(BitmapDescriptorFactory.defaultMarker(model.getMarkerColor()))
+                    .title(String.format(Locale.getDefault(), "%s : %s", model.getName(), model.getVicinity()));
+            placesPresenter.getMap().addMarker(options).setTag(model);
         }
     }
 
-    @Override
-    public void showLoading() {
-
-    }
-
-    @Override
-    public void hideLoading() {
-
-    }
-
-    @Override
-    public void showRetry() {
-
-    }
-
-    @Override
-    public void hideRetry() {
-
-    }
-
-    @Override
-    public void showError(String message) {
-
-    }
+    @Override public void showLoading() {}
+    @Override public void hideLoading() {}
+    @Override public void showRetry() {}
+    @Override public void hideRetry() {}
+    @Override public void showError(String message) {}
 
     @Override
     public Context context() {
-        return this.getActivity().getApplicationContext();
-    }
-
-    public void initMapPosition(GoogleMap googleMap, Location lastLocation){
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastLocation.getLatitude(), lastLocation.getLongitude()), 13));
+        return this.getActivity();
     }
 }

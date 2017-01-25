@@ -1,6 +1,6 @@
 package com.stevemerollis.whereabouts.presentation.model;
 
-import com.google.gson.annotations.SerializedName;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 
 import java.util.List;
 
@@ -10,24 +10,17 @@ import java.util.List;
 public class PlaceModel {
 
     private double latitude;
-
     private double longitude;
-
     private String icon;
-
     private String googleId;
-
     private String name;
-
     private boolean openNow;
-
     private String googlePlaceId;
-
     private List<String> types;
-
+    private String vicinity;
     private String whereaboutsComments;
-
     private double whereaboutsRating;
+    private boolean whereaboutsHaveVisited;
 
     public void setLongitude(double longitude) {
         this.longitude = longitude;
@@ -57,6 +50,8 @@ public class PlaceModel {
         this.types = types;
     }
 
+    public void setVicinity(String vicinity){ this.vicinity = vicinity; }
+
     public void setWhereaboutsComments(String whereaboutsComments) {
         this.whereaboutsComments = whereaboutsComments;
     }
@@ -67,6 +62,10 @@ public class PlaceModel {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public void setWhereaboutsHaveVisited(boolean haveVisited){
+        this.whereaboutsHaveVisited = haveVisited;
     }
 
     public double getLatitude() {
@@ -107,5 +106,17 @@ public class PlaceModel {
 
     public double getWhereaboutsRating() {
         return whereaboutsRating;
+    }
+
+    public boolean getHaveVisited(){ return whereaboutsHaveVisited; }
+
+    public String getVicinity(){ return vicinity; }
+
+    public float getMarkerColor(){
+        if (!whereaboutsHaveVisited) return BitmapDescriptorFactory.HUE_CYAN;
+        if (whereaboutsRating < 2.0) return BitmapDescriptorFactory.HUE_YELLOW;
+        if (whereaboutsRating < 3.0) return BitmapDescriptorFactory.HUE_ORANGE;
+        if (whereaboutsRating < 4.0) return BitmapDescriptorFactory.HUE_RED;
+        return BitmapDescriptorFactory.HUE_VIOLET;
     }
 }

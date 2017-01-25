@@ -40,8 +40,10 @@ public class PlaceModelDataMapper {
         placeModel.setOpenNow(place.isOpenNow());
         placeModel.setGooglePlaceId(place.getGooglePlaceId());
         placeModel.setTypes(place.getTypes());
+        placeModel.setVicinity(place.getVicinity());
         placeModel.setWhereaboutsComments(place.getWhereaboutsComments());
         placeModel.setWhereaboutsRating(place.getWhereaboutsRating());
+        placeModel.setWhereaboutsHaveVisited(place.getHaveVisited());
 
         return placeModel;
     }
