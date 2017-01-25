@@ -7,7 +7,7 @@ import com.stevemerollis.whereabouts.presentation.model.PlaceModel;
 import java.util.Collection;
 
 /**
- * Just changing this comment slightly to check I can check in here.
+ * Just changing this comment slightly to check I can check in here...
  * Interface representing a View in a model view presenter (MVP) pattern.
  * In this case is used as a view representing a list of {@link PlaceModel}.
  */
