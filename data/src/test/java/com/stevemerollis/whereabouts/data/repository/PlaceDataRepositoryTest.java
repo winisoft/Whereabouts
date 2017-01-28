@@ -1,9 +1,9 @@
 package com.stevemerollis.whereabouts.data.repository;
 
 import com.stevemerollis.whereabouts.data.entity.PlaceEntity;
-import com.stevemerollis.whereabouts.data.entity.mapper.PlaceEntityDataMapper;
-import com.stevemerollis.whereabouts.data.repository.datasource.PlaceDataStore;
-import com.stevemerollis.whereabouts.data.repository.datasource.PlaceDataStoreFactory;
+import com.stevemerollis.whereabouts.data.entity.mapper.place.PlaceEntityDataMapper;
+import com.stevemerollis.whereabouts.data.repository.datasource.place.PlaceDataStore;
+import com.stevemerollis.whereabouts.data.repository.datasource.DataStoreFactory;
 import com.stevemerollis.whereabouts.domain.Place;
 import com.stevemerollis.whereabouts.domain.PlaceRequestParams;
 
@@ -28,7 +28,7 @@ public class PlaceDataRepositoryTest {
 
     private PlaceDataRepository placeDataRepository;
 
-    @Mock private PlaceDataStoreFactory mockPlaceDataStoreFactory;
+    @Mock private DataStoreFactory mockDataStoreFactory;
     @Mock private PlaceEntityDataMapper mockPlaceEntityDataMapper;
     @Mock private PlaceDataStore mockPlaceDataStore;
     @Mock private PlaceEntity mockPlaceEntity;
@@ -37,8 +37,8 @@ public class PlaceDataRepositoryTest {
 
     @Before
     public void setUp() {
-        placeDataRepository = new PlaceDataRepository(mockPlaceDataStoreFactory, mockPlaceEntityDataMapper);
-        given(mockPlaceDataStoreFactory.createCloudDataStore()).willReturn(mockPlaceDataStore);
+        placeDataRepository = new PlaceDataRepository(mockDataStoreFactory, mockPlaceEntityDataMapper);
+        given(mockDataStoreFactory.createCloudPlaceDataStore()).willReturn(mockPlaceDataStore);
     }
 
     @Test
@@ -49,7 +49,7 @@ public class PlaceDataRepositoryTest {
 
         placeDataRepository.places(mockPlaceRequestParams);
 
-        verify(mockPlaceDataStoreFactory).createCloudDataStore();
+        verify(mockDataStoreFactory).createCloudPlaceDataStore();
         verify(mockPlaceDataStore).getPlaceEntityList(mockPlaceRequestParams);
     }
 }

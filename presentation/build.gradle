@@ -8,6 +8,7 @@ android {
     buildToolsVersion globalConfiguration.getAt("androidBuildToolsVersion")
 
     defaultConfig {
+        multiDexEnabled true
         minSdkVersion globalConfiguration.getAt("androidMinSdkVersion")
         targetSdkVersion globalConfiguration.getAt("androidTargetSdkVersion")
 
@@ -79,4 +80,9 @@ dependencies {
     androidTestCompile presentationTestDependencies.dexmakerMockito
     androidTestCompile presentationTestDependencies.espresso
     androidTestCompile presentationTestDependencies.testingSupportLib
+    //compile 'com.android.support:recyclerview-v7:25.1.0'
+    //compile 'com.android.support:recyclerview-v7:25.1.0'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
 }

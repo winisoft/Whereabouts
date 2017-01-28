@@ -2,6 +2,7 @@ package com.stevemerollis.whereabouts.data.entity.mapper;
 
 import com.google.gson.JsonSyntaxException;
 import com.stevemerollis.whereabouts.data.entity.PlaceEntity;
+import com.stevemerollis.whereabouts.data.entity.mapper.place.PlaceEntityJsonMapper;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -32,7 +33,7 @@ public class PlaceEntityJsonMapperTest {
     @Test
     public void testTransformPlaceEntityCollectionHappyCase() {
         Collection<PlaceEntity> placeEntities =
-                placeEntityJsonMapper.transformPlaceApiResponse(
+                placeEntityJsonMapper.transform(
                         JSON_RESPONSE);
 
         assertThat(((PlaceEntity) placeEntities.toArray()[0]).googleId, is("asdfgh"));
@@ -43,6 +44,6 @@ public class PlaceEntityJsonMapperTest {
     @Test
     public void testTransformPlaceEntityCollectionNotValidResponse() {
         expectedException.expect(JsonSyntaxException.class);
-        placeEntityJsonMapper.transformPlaceApiResponse("Garbage data.");
+        placeEntityJsonMapper.transform("Garbage data.");
     }
 }

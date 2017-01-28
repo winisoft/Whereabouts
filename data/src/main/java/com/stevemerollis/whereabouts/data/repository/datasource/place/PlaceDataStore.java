@@ -1,4 +1,4 @@
-package com.stevemerollis.whereabouts.data.repository.datasource;
+package com.stevemerollis.whereabouts.data.repository.datasource.place;
 
 import java.util.List;
 

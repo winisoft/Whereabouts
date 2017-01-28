@@ -4,9 +4,11 @@ import android.content.Context;
 
 import com.stevemerollis.whereabouts.data.executor.JobExecutor;
 import com.stevemerollis.whereabouts.data.repository.PlaceDataRepository;
+import com.stevemerollis.whereabouts.data.repository.PlaceTypeDataRepository;
 import com.stevemerollis.whereabouts.domain.executor.PostExecutionThread;
 import com.stevemerollis.whereabouts.domain.executor.ThreadExecutor;
 import com.stevemerollis.whereabouts.domain.repository.PlaceRepository;
+import com.stevemerollis.whereabouts.domain.repository.PlaceTypeRepository;
 import com.stevemerollis.whereabouts.presentation.AndroidApplication;
 import com.stevemerollis.whereabouts.presentation.UIThread;
 
@@ -26,8 +28,7 @@ public class ApplicationModule {
         this.application = application;
     }
 
-    @Provides
-    @Singleton
+    @Provides @Singleton
     Context provideApplicationContext() {
         return this.application;
     }
@@ -44,4 +45,7 @@ public class ApplicationModule {
 
     @Provides @Singleton
     PlaceRepository provideGooglePlaceRepository(PlaceDataRepository googlePlaceDataRepository){ return googlePlaceDataRepository; }
+
+    @Provides @Singleton
+    PlaceTypeRepository providePlaceTypeRepository(PlaceTypeDataRepository placeTypeDataRepository){ return placeTypeDataRepository; }
 }

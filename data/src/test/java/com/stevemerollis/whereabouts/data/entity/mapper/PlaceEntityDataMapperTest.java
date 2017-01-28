@@ -1,6 +1,7 @@
 package com.stevemerollis.whereabouts.data.entity.mapper;
 
 import com.stevemerollis.whereabouts.data.entity.PlaceEntity;
+import com.stevemerollis.whereabouts.data.entity.mapper.place.PlaceEntityDataMapper;
 import com.stevemerollis.whereabouts.domain.Place;
 
 import org.junit.Before;

@@ -4,16 +4,13 @@ import android.os.Bundle;
 
 import com.stevemerollis.whereabouts.presentation.R;
 import com.stevemerollis.whereabouts.presentation.di.HasComponent;
-import com.stevemerollis.whereabouts.presentation.di.components.DaggerPlaceComponent;
-import com.stevemerollis.whereabouts.presentation.di.components.PlaceComponent;
+import com.stevemerollis.whereabouts.presentation.di.components.DaggerSearchParamsComponent;
 import com.stevemerollis.whereabouts.presentation.di.components.SearchParamsComponent;
-import com.stevemerollis.whereabouts.presentation.view.fragment.PlacesFragment;
 import com.stevemerollis.whereabouts.presentation.view.fragment.SearchParamsFragment;
 
-public class MapsActivity extends BaseActivity implements HasComponent<PlaceComponent> {
+public class SearchParamsActivity extends BaseActivity implements HasComponent<SearchParamsComponent> {
 
-    private PlaceComponent placeComponent;
-
+    private SearchParamsComponent searchParamsComponent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,17 +20,17 @@ public class MapsActivity extends BaseActivity implements HasComponent<PlaceComp
         this.initializeInjector();
 
         if (savedInstanceState == null){
-            addFragment(R.id.fragmentContainer, new PlacesFragment());
+            addFragment(R.id.fragmentContainer, new SearchParamsFragment());
         }
     }
 
     @Override
-    public PlaceComponent getComponent() {
-        return this.placeComponent;
+    public SearchParamsComponent getComponent() {
+        return this.searchParamsComponent;
     }
 
     private void initializeInjector() {
-        this.placeComponent = DaggerPlaceComponent.builder()
+        this.searchParamsComponent = DaggerSearchParamsComponent.builder()
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build();

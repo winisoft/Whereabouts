@@ -1,8 +1,8 @@
 package com.stevemerollis.whereabouts.data.repository;
 
-import com.stevemerollis.whereabouts.data.entity.mapper.PlaceEntityDataMapper;
-import com.stevemerollis.whereabouts.data.repository.datasource.PlaceDataStore;
-import com.stevemerollis.whereabouts.data.repository.datasource.PlaceDataStoreFactory;
+import com.stevemerollis.whereabouts.data.entity.mapper.place.PlaceEntityDataMapper;
+import com.stevemerollis.whereabouts.data.repository.datasource.place.PlaceDataStore;
+import com.stevemerollis.whereabouts.data.repository.datasource.DataStoreFactory;
 import com.stevemerollis.whereabouts.domain.Place;
 import com.stevemerollis.whereabouts.domain.PlaceRequestParams;
 import com.stevemerollis.whereabouts.domain.repository.PlaceRepository;
@@ -18,19 +18,19 @@ import io.reactivex.Observable;
  */
 public class PlaceDataRepository implements PlaceRepository {
 
-    private final PlaceDataStoreFactory placeDataStoreFactory;
+    private final DataStoreFactory dataStoreFactory;
     private final PlaceEntityDataMapper placeEntityDataMapper;
 
     @Inject
-    PlaceDataRepository(PlaceDataStoreFactory dataStoreFactory,
+    PlaceDataRepository(DataStoreFactory dataStoreFactory,
                         PlaceEntityDataMapper placeEntityDataMapper) {
-        this.placeDataStoreFactory = dataStoreFactory;
+        this.dataStoreFactory = dataStoreFactory;
         this.placeEntityDataMapper = placeEntityDataMapper;
     }
 
     @Override
     public Observable<List<Place>> places(PlaceRequestParams params) {
-        final PlaceDataStore placeDataStore = this.placeDataStoreFactory.createCloudDataStore();
+        final PlaceDataStore placeDataStore = this.dataStoreFactory.createCloudPlaceDataStore();
         return placeDataStore.getPlaceEntityList(params).map(this.placeEntityDataMapper::transform);
     }
 }

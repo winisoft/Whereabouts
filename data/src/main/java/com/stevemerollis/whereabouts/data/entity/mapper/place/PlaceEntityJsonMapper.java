@@ -1,4 +1,4 @@
-package com.stevemerollis.whereabouts.data.entity.mapper;
+package com.stevemerollis.whereabouts.data.entity.mapper.place;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
@@ -19,7 +19,7 @@ public class PlaceEntityJsonMapper {
         this.gson = new Gson();
     }
 
-    public List<PlaceEntity> transformPlaceApiResponse(String placeJsonResponse)
+    public List<PlaceEntity> transform(String placeJsonResponse)
             throws JsonSyntaxException {
         final Type placeType = new TypeToken<List<PlaceEntity>>(){}.getType();
         return this.gson.fromJson(placeJsonResponse, placeType);

@@ -18,7 +18,7 @@ import com.stevemerollis.whereabouts.domain.exception.ErrorBundle;
 import com.stevemerollis.whereabouts.domain.interactor.DefaultObserver;
 import com.stevemerollis.whereabouts.domain.interactor.GetPlaces;
 import com.stevemerollis.whereabouts.presentation.R;
-import com.stevemerollis.whereabouts.presentation.adapter.PlaceInfoWindowAdapter;
+import com.stevemerollis.whereabouts.presentation.view.adapter.PlaceInfoWindowAdapter;
 import com.stevemerollis.whereabouts.presentation.di.PerActivity;
 import com.stevemerollis.whereabouts.presentation.exception.ErrorMessageFactory;
 import com.stevemerollis.whereabouts.presentation.mapper.PlaceModelDataMapper;

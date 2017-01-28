@@ -14,5 +14,6 @@ import dagger.Component;
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = {ActivityModule.class, PlaceModule.class})
 public interface PlaceComponent extends ActivityComponent {
+
     void inject(PlacesFragment placeMapFragment);
 }

@@ -1,4 +1,4 @@
-package com.stevemerollis.whereabouts.data.entity.mapper;
+package com.stevemerollis.whereabouts.data.entity.mapper.place;
 
 import com.stevemerollis.whereabouts.data.entity.PlaceEntity;
 import com.stevemerollis.whereabouts.domain.Place;
@@ -16,7 +16,7 @@ import javax.inject.Inject;
 public class PlaceEntityDataMapper {
 
     @Inject
-    PlaceEntityDataMapper(){}
+    public PlaceEntityDataMapper(){}
 
     /**
      * Transform a {@link PlaceEntity} into an {@link Place}.

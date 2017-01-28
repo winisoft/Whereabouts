@@ -1,4 +1,4 @@
-package com.stevemerollis.whereabouts.presentation.adapter;
+package com.stevemerollis.whereabouts.presentation.view.adapter;
 
 import android.app.Activity;
 import android.content.Context;

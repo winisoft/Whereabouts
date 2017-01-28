@@ -5,6 +5,7 @@ import android.content.Context;
 import com.stevemerollis.whereabouts.domain.executor.PostExecutionThread;
 import com.stevemerollis.whereabouts.domain.executor.ThreadExecutor;
 import com.stevemerollis.whereabouts.domain.repository.PlaceRepository;
+import com.stevemerollis.whereabouts.domain.repository.PlaceTypeRepository;
 import com.stevemerollis.whereabouts.presentation.di.modules.ApplicationModule;
 import com.stevemerollis.whereabouts.presentation.view.activity.BaseActivity;
 
@@ -25,4 +26,5 @@ public interface ApplicationComponent {
     ThreadExecutor threadExecutor();
     PostExecutionThread postExecutionThread();
     PlaceRepository placeRepository();
+    PlaceTypeRepository placeTypeRepository();
 }
