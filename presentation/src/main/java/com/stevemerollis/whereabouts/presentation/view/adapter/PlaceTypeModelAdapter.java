@@ -5,9 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.TextView;
 
 import com.stevemerollis.whereabouts.presentation.R;
 import com.stevemerollis.whereabouts.presentation.model.PlaceTypeModel;
@@ -46,7 +44,11 @@ public class PlaceTypeModelAdapter extends RecyclerView.Adapter<PlaceTypeModelAd
 
     @Override
     public int getItemCount() {
-        return (this.placeTypeModelCollection != null) ? this.placeTypeModelCollection.size() : 0;
+        return (this.placeTypeModelCollection == null) ? 0 : this.placeTypeModelCollection.size();
+    }
+
+    @Override public long getItemId(int position) {
+        return position;
     }
 
     public void setPlaceTypeModelCollection(Collection<PlaceTypeModel> placeTypeModelCollection) {

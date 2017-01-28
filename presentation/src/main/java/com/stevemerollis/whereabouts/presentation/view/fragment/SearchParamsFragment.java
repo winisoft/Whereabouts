@@ -16,6 +16,7 @@ import com.stevemerollis.whereabouts.presentation.di.components.SearchParamsComp
 import com.stevemerollis.whereabouts.presentation.model.PlaceTypeModel;
 import com.stevemerollis.whereabouts.presentation.presenter.SearchParamsPresenter;
 import com.stevemerollis.whereabouts.presentation.view.SearchParamsView;
+import com.stevemerollis.whereabouts.presentation.view.adapter.PlaceTypesLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -134,12 +135,13 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
     }
 
     private void setUpRecyclerViews() {
+        this.rv_amusement.setLayoutManager(new PlaceTypesLayoutManager(context()));
+        this.rv_eating.setLayoutManager(new PlaceTypesLayoutManager(context()));
+        this.rv_shopping.setLayoutManager(new PlaceTypesLayoutManager(context()));
+
         this.rv_amusement.setAdapter(placeTypeAmusementAdapter);
         this.rv_eating.setAdapter(placeTypeEatingAdapter);
         this.rv_shopping.setAdapter(placeTypeShoppingAdapter);
-
-        PlaceTypeModelAdapter ptma = (PlaceTypeModelAdapter)this.rv_amusement.getAdapter();
-        String wait = "yes";
     }
 
     private void loadPlaceTypes(){
