@@ -2,6 +2,8 @@
     <string name="app_name">Whereabouts</string>
     <string name="title_activity_maps">Whereabouts</string>
 
+    <string name="go">Go</string>
+
     <string name="google_place_key">AIzaSyCpmBND9hihwkF6_qiWKNx4UDXLnsmSVwQ</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBXE7ycp1BbKydU3xX-acXmIjAPES0pyXc</string>
 

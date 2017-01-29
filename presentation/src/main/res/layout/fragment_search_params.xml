@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
     <Button
-        android:text="Button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spf_btn_go"
         android:layout_weight="1"
-        android:minHeight="95dp"/>
+        android:minHeight="95dp"
+        android:text="@string/go" />
 
     <LinearLayout
         android:orientation="horizontal"
@@ -22,19 +23,25 @@
             android:id="@+id/spf_rv_eating"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@android:color/black"
+            android:paddingTop="5dp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/spf_rv_amusement"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@android:color/black"
+            android:paddingTop="5dp" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/spf_rv_shopping"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:background="@android:color/black"
+            android:paddingTop="5dp" />
     </LinearLayout>
 
 </LinearLayout>
