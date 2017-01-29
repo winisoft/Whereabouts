@@ -2,6 +2,7 @@ package com.stevemerollis.whereabouts.presentation.presenter;
 
 import android.support.annotation.NonNull;
 
+import com.stevemerollis.whereabouts.domain.PlaceRequestParams;
 import com.stevemerollis.whereabouts.domain.PlaceType;
 import com.stevemerollis.whereabouts.domain.exception.DefaultErrorBundle;
 import com.stevemerollis.whereabouts.domain.exception.ErrorBundle;
@@ -73,6 +74,12 @@ public class SearchParamsPresenter implements Presenter {
 
     private void getPlaceTypesList() {
         this.getPlaceTypesUseCase.execute(new PlaceTypeListObserver(), null);
+    }
+
+    public void onGoBtnClicked() {
+        //TODO: gather the parameters from the views here
+        PlaceRequestParams params = new PlaceRequestParams(0.0, 0.0, 100, "");
+        this.searchParamsView.requestSearch(params);
     }
 
     private final class PlaceTypeListObserver extends DefaultObserver<List<PlaceType>> {

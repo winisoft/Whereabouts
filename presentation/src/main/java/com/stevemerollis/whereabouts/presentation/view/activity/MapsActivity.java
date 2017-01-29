@@ -1,5 +1,7 @@
 package com.stevemerollis.whereabouts.presentation.view.activity;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.stevemerollis.whereabouts.presentation.R;
@@ -25,6 +27,10 @@ public class MapsActivity extends BaseActivity implements HasComponent<PlaceComp
         if (savedInstanceState == null){
             addFragment(R.id.fragmentContainer, new PlacesFragment());
         }
+    }
+
+    public static Intent getCallingIntent(Context context) {
+        return new Intent(context, MapsActivity.class);
     }
 
     @Override

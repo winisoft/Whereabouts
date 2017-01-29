@@ -2,13 +2,18 @@ package com.stevemerollis.whereabouts.presentation.view.activity;
 
 import android.os.Bundle;
 
+import com.stevemerollis.whereabouts.domain.PlaceRequestParams;
 import com.stevemerollis.whereabouts.presentation.R;
 import com.stevemerollis.whereabouts.presentation.di.HasComponent;
 import com.stevemerollis.whereabouts.presentation.di.components.DaggerSearchParamsComponent;
 import com.stevemerollis.whereabouts.presentation.di.components.SearchParamsComponent;
+import com.stevemerollis.whereabouts.presentation.model.PlaceTypeModel;
 import com.stevemerollis.whereabouts.presentation.view.fragment.SearchParamsFragment;
 
-public class SearchParamsActivity extends BaseActivity implements HasComponent<SearchParamsComponent> {
+import butterknife.OnClick;
+
+public class SearchParamsActivity extends BaseActivity implements HasComponent<SearchParamsComponent>,
+    SearchParamsFragment.SearchParamsListener {
 
     private SearchParamsComponent searchParamsComponent;
 
@@ -34,5 +39,10 @@ public class SearchParamsActivity extends BaseActivity implements HasComponent<S
                 .applicationComponent(getApplicationComponent())
                 .activityModule(getActivityModule())
                 .build();
+    }
+
+    @Override
+    public void onGoBtnClicked(PlaceRequestParams placeRequestParams) {
+        this.navigator.navigateToMapsActivity(this, placeRequestParams);
     }
 }

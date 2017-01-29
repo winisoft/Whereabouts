@@ -1,6 +1,7 @@
 package com.stevemerollis.whereabouts.presentation.view.fragment;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.stevemerollis.whereabouts.domain.PlaceRequestParams;
 import com.stevemerollis.whereabouts.presentation.R;
 import com.stevemerollis.whereabouts.presentation.view.adapter.PlaceTypeModelAdapter;
 import com.stevemerollis.whereabouts.presentation.di.components.SearchParamsComponent;
@@ -26,12 +28,12 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class SearchParamsFragment extends BaseFragment implements SearchParamsView {
 
     public interface SearchParamsListener {
-        void onPlaceTypeClicked(final PlaceTypeModel placeTypeModel);
-        void onGoBtnClicked();
+        void onGoBtnClicked(final PlaceRequestParams placeRequestParams);
     }
 
     @Inject SearchParamsPresenter searchParamsPresenter;
@@ -48,10 +50,10 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
 
     public SearchParamsFragment() { setRetainInstance(true); }
 
-    @Override public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof SearchParamsListener) {
-            this.searchParamsListener = (SearchParamsListener) context;
+    @Override public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof SearchParamsListener) {
+            this.searchParamsListener = (SearchParamsListener) activity;
         }
     }
 
@@ -134,6 +136,13 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
         }
     }
 
+    @Override
+    public void requestSearch(PlaceRequestParams placeRequestParams) {
+        if (this.searchParamsListener != null) {
+            this.searchParamsListener.onGoBtnClicked(placeRequestParams);
+        }
+    }
+
     private void setUpRecyclerViews() {
         this.rv_amusement.setLayoutManager(new PlaceTypesLayoutManager(context()));
         this.rv_eating.setLayoutManager(new PlaceTypesLayoutManager(context()));
@@ -146,5 +155,11 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
 
     private void loadPlaceTypes(){
         this.searchParamsPresenter.loadPlaceTypes();
+    }
+
+    @OnClick(R.id.spf_btn_go) void onBtnGoClick() {
+        if (searchParamsPresenter != null) {
+            searchParamsPresenter.onGoBtnClicked();
+        }
     }
 }
