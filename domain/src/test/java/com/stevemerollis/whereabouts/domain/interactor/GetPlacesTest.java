@@ -37,7 +37,7 @@ public class GetPlacesTest {
 
     @Test
     public void testGetUserListUseCaseObservableHappyCase() {
-        PlaceRequestParams placeRequestParams = new PlaceRequestParams(0.0, 0.0, 1, "");
+        PlaceRequestParams placeRequestParams = new PlaceRequestParams();
         getPlaces.buildUseCaseObservable(GetPlaces.Params.forPlaces(placeRequestParams));
 
         verify(mockPlaceRepository).places(placeRequestParams);

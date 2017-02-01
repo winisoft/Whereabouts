@@ -5,11 +5,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.TextView;
 
 import com.stevemerollis.whereabouts.presentation.R;
 import com.stevemerollis.whereabouts.presentation.model.PlaceTypeModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -23,6 +27,7 @@ public class PlaceTypeModelAdapter extends RecyclerView.Adapter<PlaceTypeModelAd
 
     private List<PlaceTypeModel> placeTypeModelCollection;
     private final LayoutInflater layoutInflater;
+    private final List<String> checkedKeys = new ArrayList<>();
 
     @Inject
     PlaceTypeModelAdapter(Context context) {
@@ -40,15 +45,21 @@ public class PlaceTypeModelAdapter extends RecyclerView.Adapter<PlaceTypeModelAd
     public void onBindViewHolder(PlaceTypeViewHolder holder, int position) {
         final PlaceTypeModel placeTypeModel = this.placeTypeModelCollection.get(position);
         holder.checkBox.setText(placeTypeModel.name);
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked && !checkedKeys.contains(placeTypeModel.id)) {
+                    checkedKeys.add(placeTypeModel.id);
+                } else if (!isChecked && checkedKeys.contains(placeTypeModel.id)) {
+                    checkedKeys.remove(placeTypeModel.id);
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return (this.placeTypeModelCollection == null) ? 0 : this.placeTypeModelCollection.size();
-    }
-
-    @Override public long getItemId(int position) {
-        return position;
+        return (this.placeTypeModelCollection != null) ? this.placeTypeModelCollection.size() : 0;
     }
 
     public void setPlaceTypeModelCollection(Collection<PlaceTypeModel> placeTypeModelCollection) {
@@ -58,6 +69,10 @@ public class PlaceTypeModelAdapter extends RecyclerView.Adapter<PlaceTypeModelAd
 
         this.placeTypeModelCollection = (List<PlaceTypeModel>) placeTypeModelCollection;
         this.notifyDataSetChanged();
+    }
+
+    public List<String> getSelectedItemsIds() {
+        return checkedKeys;
     }
 
     static class PlaceTypeViewHolder extends RecyclerView.ViewHolder {

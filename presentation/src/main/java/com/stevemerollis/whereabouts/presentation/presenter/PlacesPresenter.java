@@ -128,7 +128,7 @@ public class PlacesPresenter implements Presenter,
     }
 
     private void getPlaceModelList() {
-        PlaceRequestParams domainRequest = new PlaceRequestParams(0.0, 0.0, 123, "restaurant");
+        PlaceRequestParams domainRequest = new PlaceRequestParams();
         this.getPlacesUseCase.execute(new PlaceListObserver(), GetPlaces.Params.forPlaces(domainRequest));
     }
 

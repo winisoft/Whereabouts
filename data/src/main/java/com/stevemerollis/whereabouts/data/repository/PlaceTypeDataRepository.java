@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 
 /**
- * {@link PlaceTypeRepository} for retrieving placeType data.
+ * {@link PlaceTypeRepository} for retrieving placeTypes data.
  */
 public class PlaceTypeDataRepository implements PlaceTypeRepository {
 

@@ -1,21 +1,21 @@
 package com.stevemerollis.whereabouts.domain;
 
+import java.util.List;
+
 public class PlaceRequestParams {
 
-    private double latitude;
+    public double latitude;
+    public double longitude;
+    public int proximityRadius;
+    public List<String> placeTypes;
+    public boolean iHaveBeen;
+    public boolean iHaveNotBeen;
+    public boolean iHaveEitherBeenOrNotBeen;
+    public int minimumRating;
+    public boolean ratedByMe;
+    public boolean maximumPrice;
 
-    private double longitude;
-
-    private int proximityRadius;
-
-    private String establishmentType;
-
-    public PlaceRequestParams(double lat, double lng, int proximityRadius, String establishmentType){
-        this.latitude = lat;
-        this.longitude = lng;
-        this.proximityRadius = proximityRadius;
-        this.establishmentType = establishmentType;
-    }
+    public PlaceRequestParams(){}
 
     public double getLatitude(){ return latitude; }
 
@@ -23,6 +23,9 @@ public class PlaceRequestParams {
 
     public int getProximityRadius(){ return proximityRadius; }
 
-    public String getEstablishmentType(){ return establishmentType; }
+    public List<String> getPlaceTypes(){ return placeTypes; }
+
+    /*List<String> selectedPlaceTypes, String distanceText, Enums.VISITED_PARAM visitedParam, int minRating,
+    boolean myRate, int maxPrice, boolean usesOpenAtTime*/
 
 }

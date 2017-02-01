@@ -2,7 +2,27 @@
     <string name="app_name">Whereabouts</string>
     <string name="title_activity_maps">Whereabouts</string>
 
-    <string name="go">Go</string>
+    <string name="scf_btn_find_text">Find</string>
+
+    <string name="spf_btn_go_text">Go</string>
+    <string name="spf_tv_distance_label_text">Within</string>
+    <string name="spf_tv_distance_unit_text">miles</string>
+    <string name="spf_rb_near_me_text">...of me!</string>
+    <string name="spf_rb_near_place_text">of...</string>
+    <string name="spf_rb_open_now_text">Open Now</string>
+    <string name="spf_rb_open_at_default_text">Open...</string>
+    <string name="spf_rb_open_at_time_text">Open at {0}:{1} {2}</string>
+    <string name="spf_tv_rating_label_text">Rated at least</string>
+    <string name="spf_tv_rating_me_label_text">by me</string>
+    <string name="spf_tv_rating_others_label_text">by others</string>
+    <string name="spf_rb_rated_by_me_text">...by me</string>
+    <string name="spf_rb_rated_by_others_text">...by others</string>
+    <string name="spf_tv_price_label_text">That costs</string>
+    <string name="spf_tv_price_qualifier_label_text">at most</string>
+    <string name="spf_cb_visited_text">I\'ve been to</string>
+    <string name="spf_cb_never_visited_text">I\'ve never been to</string>
+    <string name="spf_cb_marked_to_visit">I want to try</string>
+    <string name="spf_rb_visited_either_text">Either</string>
 
     <string name="google_place_key">AIzaSyCpmBND9hihwkF6_qiWKNx4UDXLnsmSVwQ</string>
     <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBXE7ycp1BbKydU3xX-acXmIjAPES0pyXc</string>
