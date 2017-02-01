@@ -36,6 +36,7 @@ public abstract class BaseActivity extends Activity {
         final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
         fragmentTransaction.add(containerViewId, fragment);
         fragmentTransaction.commit();
+        fragmentTransaction.show(fragment);
         this.getFragmentManager().executePendingTransactions();
     }
 

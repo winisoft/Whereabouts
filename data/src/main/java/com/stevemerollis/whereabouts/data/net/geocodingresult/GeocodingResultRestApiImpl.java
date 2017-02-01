@@ -6,8 +6,10 @@ import com.stevemerollis.whereabouts.data.entity.GeocodingResultEntity;
 import com.stevemerollis.whereabouts.data.entity.mapper.geocodingresult.GeocodingResultEntityJsonMapper;
 import com.stevemerollis.whereabouts.data.exception.NetworkConnectionException;
 import com.stevemerollis.whereabouts.data.mock.MockResponse;
+import com.stevemerollis.whereabouts.data.net.ApiConnection;
 import com.stevemerollis.whereabouts.data.net.BaseApiImpl;
 
+import java.net.MalformedURLException;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -32,13 +34,22 @@ public class GeocodingResultRestApiImpl extends BaseApiImpl implements Geocoding
         this.geocodingResultEntityJsonMapper = geocodingResultEntityJsonMapper;
     }
 
+    private String getGeocodingResultURL(String userQuery) {
+        //TODO: properly digest user query into parameters
+        return API_GEOCODING_URL;
+    }
+
+    private String getGeocodingResults(String userQuery) throws MalformedURLException {
+        String url = getGeocodingResultURL(userQuery);
+        return ApiConnection.createGET(url).requestSyncCall();
+    }
 
     @Override
     public Observable<List<GeocodingResultEntity>> getPlaceEntities(String userQuery) {
         return Observable.create(emitter -> {
             if (isThereInternetConnection()) {
                 try {
-                    String apiResponse = MockResponse.getPlaces().replace('"', '\"');
+                    String apiResponse = getGeocodingResults(userQuery);
                     if (apiResponse != null) {
                         List<GeocodingResultEntity> placeEntities = geocodingResultEntityJsonMapper.transform(apiResponse);
                         emitter.onNext(placeEntities);

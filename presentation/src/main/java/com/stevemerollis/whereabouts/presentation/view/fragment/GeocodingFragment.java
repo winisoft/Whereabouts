@@ -1,9 +1,11 @@
 package com.stevemerollis.whereabouts.presentation.view.fragment;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +57,11 @@ public class GeocodingFragment extends BaseFragment implements GeocodingView {
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                        Bundle savedInstanceState) {
-        final View fragmentView = inflater.inflate(R.layout.fragment_search_params, container, false);
+        ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.AppTheme_PopupOverlay);
+        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
+        final View fragmentView = localInflater.inflate(R.layout.fragment_geocoding, container, false);
+
+        //final View fragmentView = inflater.inflate(R.layout.fragment_geocoding, container, false);
         ButterKnife.bind(this, fragmentView);
         setUpRecyclerView();
         return fragmentView;

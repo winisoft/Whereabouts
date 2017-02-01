@@ -26,7 +26,7 @@ public class GetGeocodingResults extends UseCase<List<GeocodingResult>, GetGeoco
     @Override
     Observable<List<GeocodingResult>> buildUseCaseObservable(Params params) {
         Preconditions.checkNotNull(params);
-        return null;
+        return this.geocodingResultRepository.geocodingResults(params.input);
     }
 
     public static final class Params {
