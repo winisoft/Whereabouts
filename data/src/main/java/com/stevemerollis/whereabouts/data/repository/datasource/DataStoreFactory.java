@@ -9,6 +9,7 @@ import com.stevemerollis.whereabouts.data.net.place.PlaceRestApi;
 import com.stevemerollis.whereabouts.data.net.place.PlaceRestApiImpl;
 import com.stevemerollis.whereabouts.data.net.placetype.PlaceTypeRestApi;
 import com.stevemerollis.whereabouts.data.net.placetype.PlaceTypeRestApiImpl;
+import com.stevemerollis.whereabouts.data.repository.datasource.geocodingresult.GeocodingResultDataStore;
 import com.stevemerollis.whereabouts.data.repository.datasource.place.CloudPlaceDataStore;
 import com.stevemerollis.whereabouts.data.repository.datasource.place.PlaceDataStore;
 import com.stevemerollis.whereabouts.data.repository.datasource.placetype.CloudPlaceTypeDataStore;
@@ -49,5 +50,11 @@ public class DataStoreFactory {
         final PlaceTypeRestApi placeTypeRestApi = new PlaceTypeRestApiImpl(this.context, placeTypeEntityJsonMapper);
 
         return new CloudPlaceTypeDataStore(placeTypeRestApi);
+    }
+
+    public GeocodingResultDataStore createCloudGeocodingResultDataStore() {
+
+        return null;
+        //return new GeocodingResultDataStore();
     }
 }

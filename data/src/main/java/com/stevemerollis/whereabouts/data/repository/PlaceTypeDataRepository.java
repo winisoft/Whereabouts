@@ -33,9 +33,4 @@ public class PlaceTypeDataRepository implements PlaceTypeRepository {
         final PlaceTypeDataStore placeTypeDataStore = this.dataStoreFactory.createCloudPlaceTypeDataStore();
         return placeTypeDataStore.getPlaceTypeEntityList().map(this.placeTypeEntityDataMapper::transform);
     }
-
-    @Override
-    public Observable<List<GeocodingResult>> geocodingResults() {
-        return null;
-    }
 }

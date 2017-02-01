@@ -4,7 +4,7 @@ import com.fernandocejas.arrow.checks.Preconditions;
 import com.stevemerollis.whereabouts.domain.GeocodingResult;
 import com.stevemerollis.whereabouts.domain.executor.PostExecutionThread;
 import com.stevemerollis.whereabouts.domain.executor.ThreadExecutor;
-import com.stevemerollis.whereabouts.domain.repository.PlaceRepository;
+import com.stevemerollis.whereabouts.domain.repository.GeocodingResultRepository;
 
 import java.util.List;
 
@@ -14,11 +14,13 @@ import io.reactivex.Observable;
 
 public class GetGeocodingResults extends UseCase<List<GeocodingResult>, GetGeocodingResults.Params> {
 
+    private GeocodingResultRepository geocodingResultRepository;
+
     @Inject
-    GetGeocodingResults(PlaceRepository placeRepository, ThreadExecutor threadExecutor,
+    GetGeocodingResults(GeocodingResultRepository geocodingResultRepository, ThreadExecutor threadExecutor,
               PostExecutionThread postExecutionThread) {
         super(threadExecutor, postExecutionThread);
-        //this.placeRepository = placeRepository;
+        this.geocodingResultRepository = geocodingResultRepository;
     }
 
     @Override

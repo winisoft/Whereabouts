@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.stevemerollis.whereabouts.domain.executor.PostExecutionThread;
 import com.stevemerollis.whereabouts.domain.executor.ThreadExecutor;
+import com.stevemerollis.whereabouts.domain.repository.GeocodingResultRepository;
 import com.stevemerollis.whereabouts.domain.repository.PlaceRepository;
 import com.stevemerollis.whereabouts.domain.repository.PlaceTypeRepository;
 import com.stevemerollis.whereabouts.presentation.di.modules.ApplicationModule;
@@ -27,4 +28,5 @@ public interface ApplicationComponent {
     PostExecutionThread postExecutionThread();
     PlaceRepository placeRepository();
     PlaceTypeRepository placeTypeRepository();
+    GeocodingResultRepository geocodingResultRepository();
 }

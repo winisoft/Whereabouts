@@ -3,10 +3,12 @@ package com.stevemerollis.whereabouts.presentation.di.modules;
 import android.content.Context;
 
 import com.stevemerollis.whereabouts.data.executor.JobExecutor;
+import com.stevemerollis.whereabouts.data.repository.GeocodingResultDataRepository;
 import com.stevemerollis.whereabouts.data.repository.PlaceDataRepository;
 import com.stevemerollis.whereabouts.data.repository.PlaceTypeDataRepository;
 import com.stevemerollis.whereabouts.domain.executor.PostExecutionThread;
 import com.stevemerollis.whereabouts.domain.executor.ThreadExecutor;
+import com.stevemerollis.whereabouts.domain.repository.GeocodingResultRepository;
 import com.stevemerollis.whereabouts.domain.repository.PlaceRepository;
 import com.stevemerollis.whereabouts.domain.repository.PlaceTypeRepository;
 import com.stevemerollis.whereabouts.presentation.AndroidApplication;
@@ -48,4 +50,7 @@ public class ApplicationModule {
 
     @Provides @Singleton
     PlaceTypeRepository providePlaceTypeRepository(PlaceTypeDataRepository placeTypeDataRepository){ return placeTypeDataRepository; }
+
+    @Provides @Singleton
+    GeocodingResultRepository provideGeocodingResultRepository(GeocodingResultDataRepository geocodingResultDataRepository) { return geocodingResultDataRepository; }
 }

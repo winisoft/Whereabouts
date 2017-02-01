@@ -74,12 +74,13 @@ public class GeocodingPresenter implements Presenter{
     }
 
     public void geocode(String input) {
-        //this.getGeocodingResultsUseCase.execute(new GeocodingResultsObserver(), GetGeocodingResults.Params.forQuery(input));
+        this.getGeocodingResultsUseCase.execute(new GeocodingResultsObserver(), GetGeocodingResults.Params.forQuery(input));
     }
 
     private final class GeocodingResultsObserver extends DefaultObserver<List<GeocodingResult>> {
         @Override
         public void onNext(List<GeocodingResult> placeTypes) {
+            String wait = "yes";
             //show
         }
 

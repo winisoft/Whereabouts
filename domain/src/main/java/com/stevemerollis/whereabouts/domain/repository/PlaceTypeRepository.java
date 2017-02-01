@@ -17,5 +17,4 @@ public interface PlaceTypeRepository {
      */
     Observable<List<PlaceType>> placeTypes();
 
-    Observable<List<GeocodingResult>> geocodingResults();
 }
