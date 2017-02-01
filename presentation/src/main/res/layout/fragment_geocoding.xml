@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:id="@+id/scf_et_vicinity"
+            android:id="@+id/gcf_et_vicinity"
             android:layout_weight="90"
             android:inputType="text"
             tools:ignore="LabelFor"/>
@@ -26,41 +26,15 @@
             android:text="@string/scf_btn_find_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/scf_btn_find"
+            android:id="@+id/gcf_btn_find"
             android:layout_weight="10"/>
 
     </LinearLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:gravity="center_vertical">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_check_black"
-            android:id="@+id/scf_iv_found"
-            android:visibility="gone"
-            android:contentDescription=""/>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_cancel_black"
-            android:id="@+id/scf_iv_not_found"
-            android:visibility="gone"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/scf_tv_results"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
+        android:id="@+id/gcf_rv_results"/>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -73,14 +47,14 @@
             android:text="@android:string/cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/scf_btn_cancel"
+            android:id="@+id/gcf_btn_cancel"
             android:layout_weight="1"/>
 
         <Button
             android:text="@android:string/ok"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/scf_btn_ok"
+            android:id="@+id/gcf_btn_ok"
             android:layout_weight="1"/>
     </LinearLayout>
 

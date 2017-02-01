@@ -8,6 +8,7 @@ import com.stevemerollis.whereabouts.presentation.di.HasComponent;
 import com.stevemerollis.whereabouts.presentation.di.components.DaggerSearchParamsComponent;
 import com.stevemerollis.whereabouts.presentation.di.components.SearchParamsComponent;
 import com.stevemerollis.whereabouts.presentation.model.PlaceTypeModel;
+import com.stevemerollis.whereabouts.presentation.view.fragment.GeocodingFragment;
 import com.stevemerollis.whereabouts.presentation.view.fragment.SearchParamsFragment;
 
 import butterknife.OnClick;
@@ -44,5 +45,10 @@ public class SearchParamsActivity extends BaseActivity implements HasComponent<S
     @Override
     public void onGoBtnClicked(PlaceRequestParams placeRequestParams) {
         this.navigator.navigateToMapsActivity(this, placeRequestParams);
+    }
+
+    @Override
+    public void onRadButNearPlaceCheckedChanged() {
+        addFragment(R.id.fragmentContainer, new GeocodingFragment());
     }
 }

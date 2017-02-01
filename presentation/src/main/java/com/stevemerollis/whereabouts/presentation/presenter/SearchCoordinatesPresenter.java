@@ -5,14 +5,14 @@ import android.support.annotation.NonNull;
 import com.stevemerollis.whereabouts.domain.exception.ErrorBundle;
 import com.stevemerollis.whereabouts.presentation.di.PerActivity;
 import com.stevemerollis.whereabouts.presentation.exception.ErrorMessageFactory;
-import com.stevemerollis.whereabouts.presentation.view.SearchCoordinatesView;
+import com.stevemerollis.whereabouts.presentation.view.GeocodingView;
 
 import javax.inject.Inject;
 
 @PerActivity
 public class SearchCoordinatesPresenter implements Presenter {
 
-    private SearchCoordinatesView searchCoordinatesView;
+    private GeocodingView geocodingView;
     //private final GetCoordinates getCoordinatesUseCase;
 
     /*@Inject public SearchCoordinatesPresenter(GetCoordinates getCoordinatesUseCase) {
@@ -23,8 +23,8 @@ public class SearchCoordinatesPresenter implements Presenter {
 
     }
 
-    public void setView(@NonNull SearchCoordinatesView searchCoordinatesView) {
-        this.searchCoordinatesView = searchCoordinatesView;
+    public void setView(@NonNull GeocodingView geocodingView) {
+        this.geocodingView = geocodingView;
     }
 
     @Override public void start() {}
@@ -34,21 +34,21 @@ public class SearchCoordinatesPresenter implements Presenter {
     @Override public void destroy() {}
 
     private void showViewLoading() {
-        this.searchCoordinatesView.showLoading();
+        this.geocodingView.showLoading();
     }
     private void hideViewLoading() {
-        this.searchCoordinatesView.hideLoading();
+        this.geocodingView.hideLoading();
     }
     private void showViewRetry() {
-        this.searchCoordinatesView.showRetry();
+        this.geocodingView.showRetry();
     }
     private void hideViewRetry() {
-        this.searchCoordinatesView.hideRetry();
+        this.geocodingView.hideRetry();
     }
     private void showErrorMessage(ErrorBundle errorBundle) {
-        String errorMessage = ErrorMessageFactory.create(this.searchCoordinatesView.context(),
+        String errorMessage = ErrorMessageFactory.create(this.geocodingView.context(),
                 errorBundle.getException());
-        this.searchCoordinatesView.showError(errorMessage);
+        this.geocodingView.showError(errorMessage);
     }
 
     public void findCoordinates() {

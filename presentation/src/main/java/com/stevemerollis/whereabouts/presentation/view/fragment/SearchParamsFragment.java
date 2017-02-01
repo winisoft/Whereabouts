@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -26,11 +27,9 @@ import com.stevemerollis.whereabouts.presentation.presenter.SearchParamsPresente
 import com.stevemerollis.whereabouts.presentation.view.SearchParamsView;
 import com.stevemerollis.whereabouts.presentation.view.adapter.PlaceTypesLayoutManager;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -38,12 +37,12 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-import butterknife.OnClick;
 
 public class SearchParamsFragment extends BaseFragment implements SearchParamsView {
 
     public interface SearchParamsListener {
         void onGoBtnClicked(final PlaceRequestParams placeRequestParams);
+        void onRadButNearPlaceCheckedChanged();
     }
 
     @Inject SearchParamsPresenter searchParamsPresenter;
@@ -54,14 +53,15 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
     @Bind(R.id.spf_rv_amusement) RecyclerView rv_amusement;
     @Bind(R.id.spf_rv_eating) RecyclerView rv_eating;
     @Bind(R.id.spf_rv_shopping) RecyclerView rv_shopping;
+    @Bind(R.id.spf_cb_visited) CheckBox cb_visited;
+    @Bind(R.id.spf_cb_never_visited) CheckBox cb_never_visited;
+    @Bind(R.id.spf_cb_marked_to_visit) CheckBox cb_marked_to_visit;
     @Bind(R.id.spf_et_distance) EditText et_distance;
-    @Bind(R.id.spf_rg_visited) RadioGroup rg_visited;
     @Bind(R.id.spf_rg_near) RadioGroup rg_near;
     @Bind(R.id.spf_rb_near_place) RadioButton rb_near_place;
     @Bind(R.id.spf_rg_open) RadioGroup rg_open;
     @Bind(R.id.spf_rb_open_at_time) RadioButton rb_open_time;
     @Bind(R.id.spf_r8_rating) RatingBar r8_rating;
-    @Bind(R.id.spf_rg_rated_by) RadioGroup rg_rated_by;
     @Bind(R.id.spf_r8_price) RatingBar r8_price;
     @Bind(R.id.spf_btn_go) Button btn_go;
 
@@ -177,17 +177,6 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
         this.rv_shopping.setAdapter(placeTypeShoppingAdapter);
     }
 
-    private Enums.VISITED_PARAM getVisitedParam() {
-        switch (rg_visited.getCheckedRadioButtonId()) {
-            case R.id.spf_rb_visited_before:
-                return Enums.VISITED_PARAM.VISITED;
-            case R.id.spf_rb_visited_never:
-                return Enums.VISITED_PARAM.NOT_VISITED;
-            default:
-                return Enums.VISITED_PARAM.EITHER;
-        }
-    }
-
     private List<String> getSelectedPlaceTypes() {
         List<String> selectedPlaceTypes = new ArrayList<>();
 
@@ -196,10 +185,6 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
         selectedPlaceTypes.addAll(placeTypeShoppingAdapter.getSelectedItemsIds());
 
         return selectedPlaceTypes;
-    }
-
-    private boolean getIsMyRate() {
-        return rg_rated_by.getCheckedRadioButtonId() == R.id.spf_rb_rated_by_me;
     }
 
     private boolean getIsOpenAtTime() {
@@ -220,6 +205,12 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
 
     private void loadPlaceTypes(){
         this.searchParamsPresenter.loadPlaceTypes();
+    }
+
+    @OnCheckedChanged(R.id.spf_rb_near_place) void onRadButNearPlaceCheckedChanged() {
+        if (searchParamsPresenter != null && searchParamsListener != null) {
+            searchParamsListener.onRadButNearPlaceCheckedChanged();
+        }
     }
 
     @OnClick(R.id.spf_btn_go) void onBtnGoClick() {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
+import com.stevemerollis.whereabouts.domain.GeocodingResult;
 import com.stevemerollis.whereabouts.domain.PlaceType;
 
 /**
@@ -15,4 +16,6 @@ public interface PlaceTypeRepository {
      * Get an {@link Observable} which will emit a List of {@link PlaceType}.
      */
     Observable<List<PlaceType>> placeTypes();
+
+    Observable<List<GeocodingResult>> geocodingResults();
 }

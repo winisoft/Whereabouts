@@ -115,8 +115,12 @@ public class SearchParamsPresenter implements Presenter, TimePickerDialog.OnTime
 
     public void onGoBtnClicked() {
         //TODO: gather the parameters from the views here
-        PlaceRequestParams params = new PlaceRequestParams(0.0, 0.0, 100, "");
+        PlaceRequestParams params = new PlaceRequestParams();
         this.searchParamsView.requestSearch(params);
+    }
+
+    public void onBtnOpenAtCheckedChanged() {
+
     }
 
     private final class PlaceTypeListObserver extends DefaultObserver<List<PlaceType>> {

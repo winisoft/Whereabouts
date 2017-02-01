@@ -4,6 +4,7 @@ package com.stevemerollis.whereabouts.presentation.di.components;
 import com.stevemerollis.whereabouts.presentation.di.PerActivity;
 import com.stevemerollis.whereabouts.presentation.di.modules.ActivityModule;
 import com.stevemerollis.whereabouts.presentation.di.modules.SearchParamsModule;
+import com.stevemerollis.whereabouts.presentation.view.fragment.GeocodingFragment;
 import com.stevemerollis.whereabouts.presentation.view.fragment.SearchParamsFragment;
 
 import dagger.Component;
@@ -17,4 +18,5 @@ import dagger.Component;
 public interface SearchParamsComponent extends ActivityComponent {
 
     void inject(SearchParamsFragment searchParamsFragment);
+    void inject(GeocodingFragment geocodingFragment);
 }
