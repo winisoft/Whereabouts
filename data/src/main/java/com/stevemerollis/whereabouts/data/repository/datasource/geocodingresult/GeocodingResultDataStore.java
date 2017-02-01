@@ -8,5 +8,5 @@ import io.reactivex.Observable;
 
 public interface GeocodingResultDataStore {
 
-    Observable<List<GeocodingResultEntity>> getGeocodingResultEntityList();
+    Observable<List<GeocodingResultEntity>> getGeocodingResultEntityList(String userQuery);
 }

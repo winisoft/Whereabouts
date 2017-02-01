@@ -3,12 +3,16 @@ package com.stevemerollis.whereabouts.data.repository.datasource;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.stevemerollis.whereabouts.data.entity.mapper.geocodingresult.GeocodingResultEntityJsonMapper;
 import com.stevemerollis.whereabouts.data.entity.mapper.place.PlaceEntityJsonMapper;
 import com.stevemerollis.whereabouts.data.entity.mapper.placetype.PlaceTypeEntityJsonMapper;
+import com.stevemerollis.whereabouts.data.net.geocodingresult.GeocodingResultRestApi;
+import com.stevemerollis.whereabouts.data.net.geocodingresult.GeocodingResultRestApiImpl;
 import com.stevemerollis.whereabouts.data.net.place.PlaceRestApi;
 import com.stevemerollis.whereabouts.data.net.place.PlaceRestApiImpl;
 import com.stevemerollis.whereabouts.data.net.placetype.PlaceTypeRestApi;
 import com.stevemerollis.whereabouts.data.net.placetype.PlaceTypeRestApiImpl;
+import com.stevemerollis.whereabouts.data.repository.datasource.geocodingresult.CloudGeocodingResultDataStore;
 import com.stevemerollis.whereabouts.data.repository.datasource.geocodingresult.GeocodingResultDataStore;
 import com.stevemerollis.whereabouts.data.repository.datasource.place.CloudPlaceDataStore;
 import com.stevemerollis.whereabouts.data.repository.datasource.place.PlaceDataStore;
@@ -53,8 +57,9 @@ public class DataStoreFactory {
     }
 
     public GeocodingResultDataStore createCloudGeocodingResultDataStore() {
+        final GeocodingResultEntityJsonMapper geocodingResultEntityJsonMapper = new GeocodingResultEntityJsonMapper();
+        final GeocodingResultRestApi geocodingResultRestApi = new GeocodingResultRestApiImpl(this.context, geocodingResultEntityJsonMapper);
 
-        return null;
-        //return new GeocodingResultDataStore();
+        return new CloudGeocodingResultDataStore(geocodingResultRestApi);
     }
 }

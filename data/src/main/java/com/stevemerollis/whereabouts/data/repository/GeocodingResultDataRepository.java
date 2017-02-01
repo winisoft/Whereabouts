@@ -25,8 +25,8 @@ public class GeocodingResultDataRepository implements GeocodingResultRepository 
     }
 
     @Override
-    public Observable<List<GeocodingResult>> geocodingResults() {
+    public Observable<List<GeocodingResult>> geocodingResults(String userQuery) {
         final GeocodingResultDataStore geocodingResultDataStore = this.dataStoreFactory.createCloudGeocodingResultDataStore();
-        return geocodingResultDataStore.getGeocodingResultEntityList().map(null);
+        return geocodingResultDataStore.getGeocodingResultEntityList(userQuery).map(geocodingResultEntityDataMapper::transform);
     }
 }
