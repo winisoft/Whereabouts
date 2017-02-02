@@ -9,7 +9,7 @@ import io.reactivex.Observable;
 public interface GeocodingResultRestApi {
 
     //TODO: Get this outta heeere
-    String API_GEOCODING_URL = "https://maps.googleapis.com/maps/api/geocode/json?address=Chicago,+IL&key=AIzaSyAgvjOgdLZgMIF5DsOs-oTa5dNEFTx_VXU";
+    String API_GEOCODING_URL = "https://maps.googleapis.com/maps/api/geocode/json?address={0}&key={1}";
 
     Observable<List<GeocodingResultEntity>> getPlaceEntities(final String userQuery);
 }

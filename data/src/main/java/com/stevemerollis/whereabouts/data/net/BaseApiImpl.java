@@ -30,4 +30,8 @@ public class BaseApiImpl {
 
         return isConnected;
     }
+
+    public Context getContext() {
+        return this.context;
+    }
 }

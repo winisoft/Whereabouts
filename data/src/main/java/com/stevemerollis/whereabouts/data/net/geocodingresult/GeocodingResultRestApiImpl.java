@@ -2,6 +2,7 @@ package com.stevemerollis.whereabouts.data.net.geocodingresult;
 
 import android.content.Context;
 
+import com.stevemerollis.whereabouts.data.R;
 import com.stevemerollis.whereabouts.data.entity.geocoding.GeocodingResponse;
 import com.stevemerollis.whereabouts.data.entity.geocoding.GeocodingResultEntity;
 import com.stevemerollis.whereabouts.data.entity.mapper.geocodingresult.GeocodingResultEntityJsonMapper;
@@ -11,6 +12,7 @@ import com.stevemerollis.whereabouts.data.net.ApiConnection;
 import com.stevemerollis.whereabouts.data.net.BaseApiImpl;
 
 import java.net.MalformedURLException;
+import java.text.MessageFormat;
 import java.util.List;
 
 import io.reactivex.Observable;
@@ -36,8 +38,17 @@ public class GeocodingResultRestApiImpl extends BaseApiImpl implements Geocoding
     }
 
     private String getGeocodingResultURL(String userQuery) {
-        //TODO: properly digest user query into parameters
-        return API_GEOCODING_URL;
+        String[] queryFragments = userQuery.split(" ");
+        String formattedQuery = "";
+
+        for (String fragment : queryFragments) {
+            formattedQuery += fragment + '+';
+        }
+
+        formattedQuery = formattedQuery.substring(0, formattedQuery.length() -1);
+
+        return MessageFormat.format(getContext().getString(R.string.geocoding_api_url), formattedQuery,
+                getContext().getString(R.string.geocoding_key));
     }
 
     private String getGeocodingResults(String userQuery) throws MalformedURLException {
