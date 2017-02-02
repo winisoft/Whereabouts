@@ -4,6 +4,6 @@ public class GeocodingResultModel {
 
 
     public String formattedAddress;
-    public float lat;
-    public float lng;
+    public double lat;
+    public double lng;
 }

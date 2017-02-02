@@ -26,14 +26,11 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 @PerActivity
-public class SearchParamsPresenter implements Presenter, TimePickerDialog.OnTimeSetListener {
+public class SearchParamsPresenter implements Presenter {
 
     private SearchParamsView searchParamsView;
     private final GetPlaceTypes getPlaceTypesUseCase;
     private final PlaceTypeModelDataMapper placeTypeModelDataMapper;
-
-    private int openAtHour;
-    private int openAtMinute;
 
     @Inject
     public SearchParamsPresenter(GetPlaceTypes getPlaceTypesUseCase, PlaceTypeModelDataMapper placeTypeModelDataMapper){
@@ -83,59 +80,6 @@ public class SearchParamsPresenter implements Presenter, TimePickerDialog.OnTime
 
     private void getPlaceTypesList() {
         this.getPlaceTypesUseCase.execute(new PlaceTypeListObserver(), null);
-    }
-
-    @Override
-    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        this.openAtHour = hourOfDay;
-        this.openAtMinute = minute;
-
-        boolean am = openAtHour < 12;
-        int hour;
-        String minuteStr;
-
-        if (openAtHour == 0 || openAtHour == 12) {
-            hour = 12;
-        } else {
-            hour = am ? openAtHour : (openAtHour - 12);
-        }
-
-        if (openAtMinute == 0) {
-            minuteStr = "00";
-        } else {
-            minuteStr = Integer.toString(openAtMinute);
-        }
-
-        String openAtTime = MessageFormat.format(this.searchParamsView.context().getString(R.string.spf_rb_open_at_time_text),
-                hour, minuteStr, am ? "a.m." : "p.m.");
-        this.searchParamsView.setOpenAtTime(openAtTime);
-    }
-
-    public int getOpenAtHour() {
-        return openAtHour;
-    }
-
-    public int getOpenAtMinute() {
-        return openAtMinute;
-    }
-
-    public void bundleParams(List<String> selectedPlaceTypes, String distanceText, Enums.VISITED_PARAM visitedParam, int minRating,
-                             boolean myRate, int maxPrice, boolean usesOpenAtTime){
-
-        PlaceRequestParams params = new PlaceRequestParams();
-        params.placeTypes = selectedPlaceTypes;
-
-
-    }
-
-    public void onGoBtnClicked() {
-        //TODO: gather the parameters from the views here
-        PlaceRequestParams params = new PlaceRequestParams();
-        this.searchParamsView.requestSearch(params);
-    }
-
-    public void onBtnOpenAtCheckedChanged() {
-
     }
 
     private final class PlaceTypeListObserver extends DefaultObserver<List<PlaceType>> {

@@ -13,13 +13,12 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
+import android.widget.TimePicker;
 
 import com.stevemerollis.whereabouts.domain.PlaceRequestParams;
-import com.stevemerollis.whereabouts.presentation.Enums;
 import com.stevemerollis.whereabouts.presentation.R;
 import com.stevemerollis.whereabouts.presentation.view.activity.SearchParamsActivity;
 import com.stevemerollis.whereabouts.presentation.view.adapter.PlaceTypeModelAdapter;
@@ -40,9 +39,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
-import butterknife.OnItemSelected;
 
-public class SearchParamsFragment extends BaseFragment implements SearchParamsView {
+public class SearchParamsFragment extends BaseFragment implements SearchParamsView, TimePickerDialog.OnTimeSetListener {
 
     public interface SearchParamsListener {
         void onGoBtnClicked(final PlaceRequestParams placeRequestParams);
@@ -66,9 +64,15 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
     @Bind(R.id.spf_rb_near_place) RadioButton rb_near_place;
     @Bind(R.id.spf_rg_open) RadioGroup rg_open;
     @Bind(R.id.spf_rb_open_at_time) RadioButton rb_open_time;
-    @Bind(R.id.spf_r8_rating_me) RatingBar r8_rating;
+    @Bind(R.id.spf_r8_rating_me) RatingBar r8_rating_me;
+    @Bind(R.id.spf_r8_rating_others) RatingBar r8_rating_others;
     @Bind(R.id.spf_r8_price) RatingBar r8_price;
     @Bind(R.id.spf_btn_go) Button btn_go;
+
+    private double lat;
+    private double lng;
+    private int openAtHour;
+    private int openAtMinute;
 
     private SearchParamsListener searchParamsListener;
 
@@ -97,6 +101,9 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
                         getString(R.string.spf_rb_near_place_specified_text), formattedAddress);
                 rb_near_place.setText(radButText);
             }
+
+            this.lat = data.getDoubleExtra(GeocodingFragment.LATITUDE_EXTRA_KEY, 0.0);
+            this.lng = data.getDoubleExtra(GeocodingFragment.LONGITUDE_EXTRA_KEY, 0.0);
         }
 
     }
@@ -224,7 +231,7 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
     }
 
     private int getMinimumRating() {
-        return (int) r8_rating.getRating();
+        return (int) r8_rating_me.getRating();
     }
 
     private int getMaximumPrice() {
@@ -239,10 +246,35 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
         this.searchParamsPresenter.loadPlaceTypes();
     }
 
-    @OnCheckedChanged(R.id.spf_rb_near_me) void onNearMeCheckedChanged() {
-        if (rb_near_me.isSelected()) {
-            rb_near_place.setText(getString(R.string.spf_rb_near_place_text));
+    @Override
+    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+        this.openAtHour = hourOfDay;
+        this.openAtMinute = minute;
+
+        boolean am = openAtHour < 12;
+        int hour;
+        String minuteStr;
+
+        if (openAtHour == 0 || openAtHour == 12) {
+            hour = 12;
+        } else {
+            hour = am ? openAtHour : (openAtHour - 12);
         }
+
+        if (openAtMinute == 0) {
+            minuteStr = "00";
+        } else {
+            minuteStr = Integer.toString(openAtMinute);
+        }
+
+        String openAtTime = MessageFormat.format(context().getString(R.string.spf_rb_open_at_time_text),
+                hour, minuteStr, am ? "a.m." : "p.m.");
+
+        setOpenAtTime(openAtTime);
+    }
+
+    @OnClick(R.id.spf_rb_near_me) void onNearMeClicked() {
+        rb_near_place.setText(getString(R.string.spf_rb_near_place_text));
     }
 
     @OnClick(R.id.spf_rb_near_place) void onNearPlaceClicked() {
@@ -253,15 +285,26 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
 
     @OnClick(R.id.spf_rb_open_at_time) void onOpenAtTimeClicked() {
         if (rb_open_time.isChecked() && searchParamsPresenter != null) {
-            new TimePickerDialog(context(), searchParamsPresenter, searchParamsPresenter.getOpenAtHour(),
-                    searchParamsPresenter.getOpenAtMinute(), false)
-                    .show();
+            new TimePickerDialog(context(), this, openAtHour, openAtMinute, false).show();
         }
     }
 
     @OnClick(R.id.spf_btn_go) void onBtnGoClick() {
-        if (searchParamsPresenter != null) {
-            searchParamsPresenter.onGoBtnClicked();
-        }
+
+        PlaceRequestParams params = new PlaceRequestParams();
+        params.latitude = this.lat;
+        params.longitude = this.lng;
+        params.proximityRadius = Integer.parseInt(et_distance.getText().toString());
+        params.placeTypes = getSelectedPlaceTypes();
+        params.iHaveBeen = cb_visited.isChecked();
+        params.iHaveNotBeen = cb_never_visited.isChecked();
+        params.iWantToTry = cb_marked_to_visit.isChecked();
+        params.openAtHour = this.openAtHour;
+        params.openAtMinute = this.openAtMinute;
+        params.minRatingMe = (int)r8_rating_me.getRating();
+        params.minRatingOthers = (int)r8_rating_others.getRating();
+        params.maxPrice = (int)r8_price.getRating();
+
+        requestSearch(params);
     }
 }
