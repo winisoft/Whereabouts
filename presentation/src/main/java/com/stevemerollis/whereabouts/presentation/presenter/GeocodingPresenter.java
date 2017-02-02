@@ -80,7 +80,6 @@ public class GeocodingPresenter implements Presenter{
     private final class GeocodingResultsObserver extends DefaultObserver<List<GeocodingResult>> {
         @Override
         public void onNext(List<GeocodingResult> placeTypes) {
-            String wait = "yes";
             //show
         }
 

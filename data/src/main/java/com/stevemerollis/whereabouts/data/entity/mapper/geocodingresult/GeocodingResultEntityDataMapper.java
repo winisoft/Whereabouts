@@ -1,6 +1,6 @@
 package com.stevemerollis.whereabouts.data.entity.mapper.geocodingresult;
 
-import com.stevemerollis.whereabouts.data.entity.GeocodingResultEntity;
+import com.stevemerollis.whereabouts.data.entity.geocoding.GeocodingResultEntity;
 import com.stevemerollis.whereabouts.domain.GeocodingResult;
 
 import java.util.ArrayList;
@@ -19,7 +19,9 @@ public class GeocodingResultEntityDataMapper {
 
         if (geocodingResultEntity != null) {
             geocodingResult = new GeocodingResult();
-
+            geocodingResult.formattedAddress = geocodingResultEntity.formattedAddress;
+            geocodingResult.lat = geocodingResultEntity.geometry.location.lat;
+            geocodingResult.lng = geocodingResultEntity.geometry.location.lng;
         }
 
         return geocodingResult;

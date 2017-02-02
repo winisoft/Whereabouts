@@ -2,10 +2,11 @@ package com.stevemerollis.whereabouts.data.net.geocodingresult;
 
 import android.content.Context;
 
-import com.stevemerollis.whereabouts.data.entity.GeocodingResultEntity;
+import com.stevemerollis.whereabouts.data.entity.geocoding.GeocodingResponse;
+import com.stevemerollis.whereabouts.data.entity.geocoding.GeocodingResultEntity;
 import com.stevemerollis.whereabouts.data.entity.mapper.geocodingresult.GeocodingResultEntityJsonMapper;
+import com.stevemerollis.whereabouts.data.exception.GoogleApiException;
 import com.stevemerollis.whereabouts.data.exception.NetworkConnectionException;
-import com.stevemerollis.whereabouts.data.mock.MockResponse;
 import com.stevemerollis.whereabouts.data.net.ApiConnection;
 import com.stevemerollis.whereabouts.data.net.BaseApiImpl;
 
@@ -51,8 +52,13 @@ public class GeocodingResultRestApiImpl extends BaseApiImpl implements Geocoding
                 try {
                     String apiResponse = getGeocodingResults(userQuery);
                     if (apiResponse != null) {
-                        List<GeocodingResultEntity> placeEntities = geocodingResultEntityJsonMapper.transform(apiResponse);
-                        emitter.onNext(placeEntities);
+                        GeocodingResponse geocodingResponse = geocodingResultEntityJsonMapper.transform(apiResponse);
+
+                        if (!geocodingResponse.status.equals("OK")) {
+                            emitter.onError(new GoogleApiException(geocodingResponse.errorMessage));
+                        }
+
+                        emitter.onNext(geocodingResponse.resultEntities);
                         emitter.onComplete();
                     } else {
                         emitter.onError(new NetworkConnectionException());

@@ -1,7 +1,7 @@
 package com.stevemerollis.whereabouts.data.exception;
 
 /**
- * Exception throw by the application when a there is a network connection exception.
+ * Exception thrown by the application when a there is a network connection exception.
  */
 public class NetworkConnectionException extends Exception {
 

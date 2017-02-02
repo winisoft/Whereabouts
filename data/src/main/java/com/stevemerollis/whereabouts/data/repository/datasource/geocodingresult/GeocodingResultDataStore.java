@@ -1,6 +1,6 @@
 package com.stevemerollis.whereabouts.data.repository.datasource.geocodingresult;
 
-import com.stevemerollis.whereabouts.data.entity.GeocodingResultEntity;
+import com.stevemerollis.whereabouts.data.entity.geocoding.GeocodingResultEntity;
 
 import java.util.List;
 
