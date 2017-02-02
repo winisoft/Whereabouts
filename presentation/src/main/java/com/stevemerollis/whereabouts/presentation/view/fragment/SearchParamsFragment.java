@@ -192,7 +192,9 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
 
     private void prepareViews() {
         setUpRecyclerViews();
-        //et_distance.setText(getResources().getInteger(R.integer.default_distance_param));
+
+        int defaultDistance = getResources().getInteger(R.integer.default_distance_param);
+        et_distance.setText(Integer.toString(defaultDistance));
     }
 
     private void setUpRecyclerViews() {
