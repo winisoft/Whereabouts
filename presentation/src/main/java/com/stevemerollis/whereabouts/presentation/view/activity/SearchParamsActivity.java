@@ -1,5 +1,10 @@
 package com.stevemerollis.whereabouts.presentation.view.activity;
 
+import android.app.Activity;
+import android.app.DialogFragment;
+import android.app.Fragment;
+import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.stevemerollis.whereabouts.domain.PlaceRequestParams;
@@ -15,6 +20,8 @@ import butterknife.OnClick;
 
 public class SearchParamsActivity extends BaseActivity implements HasComponent<SearchParamsComponent>,
     SearchParamsFragment.SearchParamsListener {
+
+    public static final int GEOCODING_REQUEST_CODE = 1;
 
     private SearchParamsComponent searchParamsComponent;
 
@@ -42,6 +49,17 @@ public class SearchParamsActivity extends BaseActivity implements HasComponent<S
                 .build();
     }
 
+
+    protected void showDialogFragment(DialogFragment geocodingFragment, int requestCode) {
+
+        Fragment f = this.getFragmentManager().findFragmentById(R.id.fragmentContainer);
+        SearchParamsFragment spf = (SearchParamsFragment)f;
+
+        final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
+        geocodingFragment.setTargetFragment(spf, requestCode);
+        geocodingFragment.show(fragmentTransaction, "dialog");
+    }
+
     @Override
     public void onGoBtnClicked(PlaceRequestParams placeRequestParams) {
         this.navigator.navigateToMapsActivity(this, placeRequestParams);
@@ -49,6 +67,6 @@ public class SearchParamsActivity extends BaseActivity implements HasComponent<S
 
     @Override
     public void onRadButNearPlaceCheckedChanged() {
-        showDialogFragment(new GeocodingFragment());
+        showDialogFragment(new GeocodingFragment(), GEOCODING_REQUEST_CODE);
     }
 }

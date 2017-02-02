@@ -3,6 +3,7 @@ package com.stevemerollis.whereabouts.presentation.view.fragment;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.ContextThemeWrapper;
@@ -30,6 +31,10 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 public class GeocodingFragment extends DialogFragment implements GeocodingView {
+
+    public static final String FORMATTED_ADDRESS_EXTRA_KEY = "formattedAddress";
+    public static final String LATITUDE_EXTRA_KEY = "latitude";
+    public static final String LONGITUDE_EXTRA_KEY = "latitude";
 
     public interface GeocodingListener {
 
@@ -116,6 +121,20 @@ public class GeocodingFragment extends DialogFragment implements GeocodingView {
 
     @OnClick(R.id.gcf_btn_find) void onFindBtnClick() {
         geocode(et_vicinity.getText().toString());
+    }
+    @OnClick(R.id.gcf_btn_cancel) void onCancelBtnClick() { dismiss(); }
+    @OnClick(R.id.gcf_btn_ok) void onOkBtnClick() {
+        GeocodingResultModel geocodingResultModel = geocodingResultAdapter.getSelectedItem();
+
+        if (geocodingResultModel != null) {
+            Intent intent = new Intent();
+            intent.putExtra(LATITUDE_EXTRA_KEY, geocodingResultModel.lat);
+            intent.putExtra(LONGITUDE_EXTRA_KEY, geocodingResultModel.lng);
+            intent.putExtra(FORMATTED_ADDRESS_EXTRA_KEY, geocodingResultModel.formattedAddress);
+            getTargetFragment().onActivityResult(getTargetRequestCode(), Activity.RESULT_OK, intent);
+        }
+
+        dismiss();
     }
 
     @SuppressWarnings("unchecked")

@@ -4,6 +4,7 @@ package com.stevemerollis.whereabouts.presentation.view.fragment;
 import android.app.TimePickerDialog;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import android.widget.RatingBar;
 import com.stevemerollis.whereabouts.domain.PlaceRequestParams;
 import com.stevemerollis.whereabouts.presentation.Enums;
 import com.stevemerollis.whereabouts.presentation.R;
+import com.stevemerollis.whereabouts.presentation.view.activity.SearchParamsActivity;
 import com.stevemerollis.whereabouts.presentation.view.adapter.PlaceTypeModelAdapter;
 import com.stevemerollis.whereabouts.presentation.di.components.SearchParamsComponent;
 import com.stevemerollis.whereabouts.presentation.model.PlaceTypeModel;
@@ -27,6 +29,7 @@ import com.stevemerollis.whereabouts.presentation.presenter.SearchParamsPresente
 import com.stevemerollis.whereabouts.presentation.view.SearchParamsView;
 import com.stevemerollis.whereabouts.presentation.view.adapter.PlaceTypesLayoutManager;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -37,6 +40,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
+import butterknife.OnItemSelected;
 
 public class SearchParamsFragment extends BaseFragment implements SearchParamsView {
 
@@ -58,6 +62,7 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
     @Bind(R.id.spf_cb_marked_to_visit) CheckBox cb_marked_to_visit;
     @Bind(R.id.spf_et_distance) EditText et_distance;
     @Bind(R.id.spf_rg_near) RadioGroup rg_near;
+    @Bind(R.id.spf_rb_near_me) RadioButton rb_near_me;
     @Bind(R.id.spf_rb_near_place) RadioButton rb_near_place;
     @Bind(R.id.spf_rg_open) RadioGroup rg_open;
     @Bind(R.id.spf_rb_open_at_time) RadioButton rb_open_time;
@@ -81,17 +86,35 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
         this.getComponent(SearchParamsComponent.class).inject(this);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == SearchParamsActivity.GEOCODING_REQUEST_CODE) {
+            String formattedAddress = data.getStringExtra(GeocodingFragment.FORMATTED_ADDRESS_EXTRA_KEY);
+            if (formattedAddress != null && !formattedAddress.equals("")) {
+                String radButText = MessageFormat.format(
+                        getString(R.string.spf_rb_near_place_specified_text), formattedAddress);
+                rb_near_place.setText(radButText);
+            }
+        }
+
+    }
+
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                        Bundle savedInstanceState) {
         final View fragmentView = inflater.inflate(R.layout.fragment_search_params, container, false);
         ButterKnife.bind(this, fragmentView);
-        setUpRecyclerViews();
+
+        prepareViews();
+
         return fragmentView;
     }
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         this.searchParamsPresenter.setView(this);
+
         if (savedInstanceState == null){
             loadPlaceTypes();
         }
@@ -167,6 +190,11 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
         }
     }
 
+    private void prepareViews() {
+        setUpRecyclerViews();
+        //et_distance.setText(getResources().getInteger(R.integer.default_distance_param));
+    }
+
     private void setUpRecyclerViews() {
         this.rv_amusement.setLayoutManager(new PlaceTypesLayoutManager(context()));
         this.rv_eating.setLayoutManager(new PlaceTypesLayoutManager(context()));
@@ -205,6 +233,12 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
 
     private void loadPlaceTypes(){
         this.searchParamsPresenter.loadPlaceTypes();
+    }
+
+    @OnCheckedChanged(R.id.spf_rb_near_me) void clearNearPlace() {
+        if (rb_near_me.isSelected()) {
+            rb_near_place.setText(getString(R.string.spf_rb_near_place_text));
+        }
     }
 
     @OnCheckedChanged(R.id.spf_rb_near_place) void onRadButNearPlaceCheckedChanged() {

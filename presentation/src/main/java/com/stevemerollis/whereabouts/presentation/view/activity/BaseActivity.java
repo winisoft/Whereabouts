@@ -40,11 +40,6 @@ public abstract class BaseActivity extends Activity {
         this.getFragmentManager().executePendingTransactions();
     }
 
-    protected void showDialogFragment(DialogFragment fragment) {
-        final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
-        fragment.show(fragmentTransaction, "dialog");
-    }
-
     /**
      * Get the Main Application component for dependency injection.
      *

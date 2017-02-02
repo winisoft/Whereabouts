@@ -70,6 +70,10 @@ public class GeocodingResultAdapter extends RecyclerView.Adapter<GeocodingResult
         this.notifyDataSetChanged();
     }
 
+    public GeocodingResultModel getSelectedItem() {
+        return geocodingResultModelCollection.get(selectedPosition);
+    }
+
     static class GeocodingResultViewHolder extends RecyclerView.ViewHolder {
         @Bind(R.id.gcf_tv_formatted_address) TextView tv_formatted_address;
 

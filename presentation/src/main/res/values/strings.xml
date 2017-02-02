@@ -9,6 +9,7 @@
     <string name="spf_tv_distance_unit_text">miles</string>
     <string name="spf_rb_near_me_text">...of me!</string>
     <string name="spf_rb_near_place_text">of...</string>
+    <string name="spf_rb_near_place_specified_text">of {0}</string>
     <string name="spf_rb_open_now_text">Open Now</string>
     <string name="spf_rb_open_at_default_text">Open...</string>
     <string name="spf_rb_open_at_time_text">Open at {0}:{1} {2}</string>
