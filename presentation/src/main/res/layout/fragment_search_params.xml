@@ -150,12 +150,12 @@
                 />
 
             <RatingBar
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/spf_r8_rating"
+                android:id="@+id/spf_r8_rating_me"
                 android:numStars="@integer/maxRating"
                 android:stepSize="1.0"
-                android:layout_weight="3.5"/>
+                />
 
             <TextView
                 android:text="@string/spf_tv_rating_me_label_text"
@@ -180,10 +180,11 @@
                 android:layout_weight="1"/>
 
             <RatingBar
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/ratingBar"
-                android:layout_weight="3.5"/>
+                android:id="@+id/spf_r8_rating_others"
+                android:numStars="@integer/maxRating"
+                android:stepSize="1.0"/>
 
             <TextView
                 android:text="@string/spf_tv_rating_others_label_text"
@@ -208,11 +209,11 @@
                 android:layout_weight="1"/>
 
             <RatingBar
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/spf_r8_price"
                 android:stepSize="1.0"
-                android:layout_weight="3.5"/>
+                android:numStars="@integer/maxRating"/>
 
             <TextView
                 android:text="@string/spf_tv_price_qualifier_label_text"

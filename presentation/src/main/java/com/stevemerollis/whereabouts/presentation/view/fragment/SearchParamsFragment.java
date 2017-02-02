@@ -66,7 +66,7 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
     @Bind(R.id.spf_rb_near_place) RadioButton rb_near_place;
     @Bind(R.id.spf_rg_open) RadioGroup rg_open;
     @Bind(R.id.spf_rb_open_at_time) RadioButton rb_open_time;
-    @Bind(R.id.spf_r8_rating) RatingBar r8_rating;
+    @Bind(R.id.spf_r8_rating_me) RatingBar r8_rating;
     @Bind(R.id.spf_r8_price) RatingBar r8_price;
     @Bind(R.id.spf_btn_go) Button btn_go;
 
