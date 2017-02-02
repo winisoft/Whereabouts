@@ -1,8 +1,8 @@
 package com.stevemerollis.whereabouts.presentation.view.fragment;
 
 
-import android.app.TimePickerDialog;
 import android.app.Activity;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -237,15 +237,23 @@ public class SearchParamsFragment extends BaseFragment implements SearchParamsVi
         this.searchParamsPresenter.loadPlaceTypes();
     }
 
-    @OnCheckedChanged(R.id.spf_rb_near_me) void clearNearPlace() {
+    @OnCheckedChanged(R.id.spf_rb_near_me) void onNearMeCheckedChanged() {
         if (rb_near_me.isSelected()) {
             rb_near_place.setText(getString(R.string.spf_rb_near_place_text));
         }
     }
 
-    @OnCheckedChanged(R.id.spf_rb_near_place) void onRadButNearPlaceCheckedChanged() {
+    @OnClick(R.id.spf_rb_near_place) void onNearPlaceClicked() {
         if (searchParamsPresenter != null && searchParamsListener != null) {
             searchParamsListener.onRadButNearPlaceCheckedChanged();
+        }
+    }
+
+    @OnClick(R.id.spf_rb_open_at_time) void onOpenAtTimeClicked() {
+        if (rb_open_time.isChecked() && searchParamsPresenter != null) {
+            new TimePickerDialog(context(), searchParamsPresenter, searchParamsPresenter.getOpenAtHour(),
+                    searchParamsPresenter.getOpenAtMinute(), false)
+                    .show();
         }
     }
 

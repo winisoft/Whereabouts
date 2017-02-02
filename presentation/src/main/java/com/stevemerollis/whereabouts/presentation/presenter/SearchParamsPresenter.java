@@ -90,9 +90,24 @@ public class SearchParamsPresenter implements Presenter, TimePickerDialog.OnTime
         this.openAtHour = hourOfDay;
         this.openAtMinute = minute;
 
-        boolean am = openAtHour < 13;
+        boolean am = openAtHour < 12;
+        int hour;
+        String minuteStr;
+
+        if (openAtHour == 0 || openAtHour == 12) {
+            hour = 12;
+        } else {
+            hour = am ? openAtHour : (openAtHour - 12);
+        }
+
+        if (openAtMinute == 0) {
+            minuteStr = "00";
+        } else {
+            minuteStr = Integer.toString(openAtMinute);
+        }
+
         String openAtTime = MessageFormat.format(this.searchParamsView.context().getString(R.string.spf_rb_open_at_time_text),
-                am ? openAtHour : (openAtHour - 12), openAtMinute, am ? "a.m." : "p.m.");
+                hour, minuteStr, am ? "a.m." : "p.m.");
         this.searchParamsView.setOpenAtTime(openAtTime);
     }
 
