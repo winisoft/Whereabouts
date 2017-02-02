@@ -1,228 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+    <LinearLayout
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/spf_rv_eating"
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/spf_rv_amusement"
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/spf_rv_eating"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/spf_rv_amusement"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/spf_rv_shopping"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_height="wrap_content"
+            >
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/spf_rv_shopping"
+            <CheckBox
+                android:text="@string/spf_cb_visited_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_cb_visited"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:text="@string/spf_cb_never_visited_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_cb_never_visited"
+                android:elevation="1dp"
+                android:layout_weight="1"/>
+
+            <CheckBox
+                android:text="@string/spf_cb_marked_to_visit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_cb_marked_to_visit"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
-        <CheckBox
-            android:text="@string/spf_cb_visited_text"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/spf_cb_visited"
-            android:layout_weight="1"/>
+            >
 
-        <CheckBox
-            android:text="@string/spf_cb_never_visited_text"
-            android:layout_width="wrap_content"
+            <TextView
+                android:text="@string/spf_tv_distance_label_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_tv_distance_label"
+                android:layout_weight="1"/>
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:ems="10"
+                android:id="@+id/spf_et_distance"
+                android:gravity="right|center_vertical"/>
+
+            <TextView
+                android:text="@string/spf_tv_distance_unit_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_tv_distance_unit_label"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spf_cb_never_visited"
-            android:elevation="1dp"
-            android:layout_weight="1"/>
+            android:orientation="horizontal"
+            android:id="@+id/spf_rg_near">
 
-        <CheckBox
-            android:text="@string/spf_cb_marked_to_visit"
-            android:layout_width="wrap_content"
+            <RadioButton
+                android:text="@string/spf_rb_near_me_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_rb_near_me"
+                android:layout_weight="1"/>
+
+            <RadioButton
+                android:text="@string/spf_rb_near_place_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_rb_near_place"
+                android:layout_weight="1"/>
+
+        </RadioGroup>
+
+        <RadioGroup
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spf_cb_marked_to_visit"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            android:orientation="horizontal"
+            android:id="@+id/spf_rg_open">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
+            <RadioButton
+                android:text="@string/spf_rb_open_now_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/spf_rb_open_now"/>
 
-        <TextView
-            android:text="@string/spf_tv_distance_label_text"
-            android:layout_width="wrap_content"
+            <RadioButton
+                android:text="@string/spf_rb_open_at_default_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_rb_open_at_time"
+                android:layout_weight="1"/>
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spf_tv_distance_label"
-            android:layout_weight="1"/>
+            android:gravity="center_vertical">
 
-        <EditText
-            android:layout_width="wrap_content"
+            <TextView
+                android:text="@string/spf_tv_rating_label_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_tv_rating_me_label"
+                android:layout_weight="1"
+                />
+
+            <RatingBar
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_r8_rating"
+                android:numStars="@integer/maxRating"
+                android:stepSize="1.0"
+                android:layout_weight="3.5"/>
+
+            <TextView
+                android:text="@string/spf_tv_rating_me_label_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_tv_rating_me_qualifier_label"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/spf_et_distance"
-            android:gravity="right|center_vertical"/>
+            android:gravity="center_vertical">
 
-        <TextView
-            android:text="@string/spf_tv_distance_unit_text"
-            android:layout_width="wrap_content"
+            <TextView
+                android:text="@string/spf_tv_rating_label_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_tv_rating_others_label"
+                android:layout_weight="1"/>
+
+            <RatingBar
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBar"
+                android:layout_weight="3.5"/>
+
+            <TextView
+                android:text="@string/spf_tv_rating_others_label_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_tv_rating_others_qualifier_label_"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spf_tv_distance_unit_label"
-            android:layout_weight="1"/>
-    </LinearLayout>
+            android:gravity="center_vertical">
 
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/spf_rg_near">
+            <TextView
+                android:text="@string/spf_tv_price_label_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_tv_price_label"
+                android:layout_weight="1"/>
 
-        <RadioButton
-            android:text="@string/spf_rb_near_me_text"
-            android:layout_width="0dp"
+            <RatingBar
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spf_r8_price"
+                android:stepSize="1.0"
+                android:layout_weight="3.5"/>
+
+            <TextView
+                android:text="@string/spf_tv_price_qualifier_label_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView6"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <Button
+            android:text="@string/spf_btn_go_text"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/spf_rb_near_me"
-            android:layout_weight="1"/>
-
-        <RadioButton
-            android:text="@string/spf_rb_near_place_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spf_rb_near_place"
-            android:layout_weight="1"/>
-
-    </RadioGroup>
-
-    <RadioGroup
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:id="@+id/spf_rg_open">
-
-        <RadioButton
-            android:text="@string/spf_rb_open_now_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:id="@+id/spf_rb_open_now"/>
-
-        <RadioButton
-            android:text="@string/spf_rb_open_at_default_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spf_rb_open_at_time"
-            android:layout_weight="1"/>
-
-    </RadioGroup>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:text="@string/spf_tv_rating_label_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spf_tv_rating_me_label"
-            android:layout_weight="1"
+            android:id="@+id/spf_btn_go"
             />
 
-        <RatingBar
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spf_r8_rating"
-            android:numStars="@integer/maxRating"
-            android:stepSize="1.0"
-            android:layout_weight="3.5"/>
-
-        <TextView
-            android:text="@string/spf_tv_rating_me_label_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spf_tv_rating_me_qualifier_label"
-            android:layout_weight="1"/>
-
     </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:text="@string/spf_tv_rating_label_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spf_tv_rating_others_label"
-            android:layout_weight="1"/>
-
-        <RatingBar
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/ratingBar"
-            android:layout_weight="3.5"/>
-
-        <TextView
-            android:text="@string/spf_tv_rating_others_label_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spf_tv_rating_others_qualifier_label_"
-            android:layout_weight="1"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical">
-
-        <TextView
-            android:text="@string/spf_tv_price_label_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spf_tv_price_label"
-            android:layout_weight="1"/>
-
-        <RatingBar
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/spf_r8_price"
-            android:stepSize="1.0"
-            android:layout_weight="3.5"/>
-
-        <TextView
-            android:text="@string/spf_tv_price_qualifier_label_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView6"
-            android:layout_weight="1"/>
-    </LinearLayout>
-
-    <Button
-        android:text="@string/spf_btn_go_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/spf_btn_go"
-        />
-
-</LinearLayout>
+</ScrollView>
