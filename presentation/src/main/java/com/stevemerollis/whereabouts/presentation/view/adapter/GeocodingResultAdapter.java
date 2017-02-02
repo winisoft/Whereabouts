@@ -26,7 +26,7 @@ public class GeocodingResultAdapter extends RecyclerView.Adapter<GeocodingResult
 
     private List<GeocodingResultModel> geocodingResultModelCollection;
     private final LayoutInflater layoutInflater;
-    private int selectedPosition = -1;
+    private int selectedPosition = 0;
 
     @Inject
     GeocodingResultAdapter(Context context) {
@@ -43,15 +43,17 @@ public class GeocodingResultAdapter extends RecyclerView.Adapter<GeocodingResult
     @Override
     public void onBindViewHolder(GeocodingResultViewHolder holder, int position) {
         final GeocodingResultModel geocodingResultModel = geocodingResultModelCollection.get(position);
+        final int pos = position;
 
         holder.tv_formatted_address.setText(geocodingResultModel.formattedAddress);
         holder.tv_formatted_address.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                v.setSelected(true);
+                selectedPosition = pos;
                 return false;
             }
         });
+        holder.tv_formatted_address.setSelected(position == selectedPosition);
     }
 
     @Override
