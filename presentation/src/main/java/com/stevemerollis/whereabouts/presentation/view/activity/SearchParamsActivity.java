@@ -49,6 +49,6 @@ public class SearchParamsActivity extends BaseActivity implements HasComponent<S
 
     @Override
     public void onRadButNearPlaceCheckedChanged() {
-        addFragment(R.id.fragmentContainer, new GeocodingFragment());
+        showDialogFragment(new GeocodingFragment());
     }
 }

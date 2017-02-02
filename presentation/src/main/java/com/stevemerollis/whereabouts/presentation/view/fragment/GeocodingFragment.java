@@ -13,11 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.stevemerollis.whereabouts.presentation.R;
+import com.stevemerollis.whereabouts.presentation.di.HasComponent;
 import com.stevemerollis.whereabouts.presentation.di.components.SearchParamsComponent;
+import com.stevemerollis.whereabouts.presentation.model.GeocodingResultModel;
 import com.stevemerollis.whereabouts.presentation.presenter.GeocodingPresenter;
 import com.stevemerollis.whereabouts.presentation.view.GeocodingView;
 import com.stevemerollis.whereabouts.presentation.view.adapter.GeocodingResultAdapter;
 import com.stevemerollis.whereabouts.presentation.view.adapter.GeocodingResultLayoutManager;
+
+import java.util.Collection;
 
 import javax.inject.Inject;
 
@@ -25,7 +29,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class GeocodingFragment extends BaseFragment implements GeocodingView {
+public class GeocodingFragment extends DialogFragment implements GeocodingView {
 
     public interface GeocodingListener {
 
@@ -57,11 +61,8 @@ public class GeocodingFragment extends BaseFragment implements GeocodingView {
 
     @Override public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                        Bundle savedInstanceState) {
-        ContextThemeWrapper contextThemeWrapper = new ContextThemeWrapper(getActivity(), R.style.AppTheme_PopupOverlay);
-        LayoutInflater localInflater = inflater.cloneInContext(contextThemeWrapper);
-        final View fragmentView = localInflater.inflate(R.layout.fragment_geocoding, container, false);
 
-        //final View fragmentView = inflater.inflate(R.layout.fragment_geocoding, container, false);
+        final View fragmentView = inflater.inflate(R.layout.fragment_geocoding, container, false);
         ButterKnife.bind(this, fragmentView);
         setUpRecyclerView();
         return fragmentView;
@@ -99,6 +100,11 @@ public class GeocodingFragment extends BaseFragment implements GeocodingView {
 
     @Override public Context context() { return getActivity(); }
 
+    @Override
+    public void renderGeocodingResults(Collection<GeocodingResultModel> geocodingResultModels) {
+        geocodingResultAdapter.setGeocodingResultModelCollection(geocodingResultModels);
+    }
+
     private void setUpRecyclerView() {
         this.rv_results.setLayoutManager(new GeocodingResultLayoutManager(context()));
         this.rv_results.setAdapter(geocodingResultAdapter);
@@ -110,5 +116,10 @@ public class GeocodingFragment extends BaseFragment implements GeocodingView {
 
     @OnClick(R.id.gcf_btn_find) void onFindBtnClick() {
         geocode(et_vicinity.getText().toString());
+    }
+
+    @SuppressWarnings("unchecked")
+    protected <C> C getComponent(Class<C> componentType) {
+        return componentType.cast(((HasComponent<C>) getActivity()).getComponent());
     }
 }

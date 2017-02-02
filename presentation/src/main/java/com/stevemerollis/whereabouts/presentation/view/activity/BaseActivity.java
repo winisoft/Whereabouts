@@ -1,6 +1,7 @@
 package com.stevemerollis.whereabouts.presentation.view.activity;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -36,8 +37,12 @@ public abstract class BaseActivity extends Activity {
         final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
         fragmentTransaction.add(containerViewId, fragment);
         fragmentTransaction.commit();
-        fragmentTransaction.show(fragment);
         this.getFragmentManager().executePendingTransactions();
+    }
+
+    protected void showDialogFragment(DialogFragment fragment) {
+        final FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
+        fragment.show(fragmentTransaction, "dialog");
     }
 
     /**

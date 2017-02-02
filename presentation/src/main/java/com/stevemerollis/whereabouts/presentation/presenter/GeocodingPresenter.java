@@ -9,8 +9,11 @@ import com.stevemerollis.whereabouts.domain.interactor.DefaultObserver;
 import com.stevemerollis.whereabouts.domain.interactor.GetGeocodingResults;
 import com.stevemerollis.whereabouts.presentation.di.PerActivity;
 import com.stevemerollis.whereabouts.presentation.exception.ErrorMessageFactory;
+import com.stevemerollis.whereabouts.presentation.mapper.GeocodingResultModelDataMapper;
+import com.stevemerollis.whereabouts.presentation.model.GeocodingResultModel;
 import com.stevemerollis.whereabouts.presentation.view.GeocodingView;
 
+import java.util.Collection;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -19,11 +22,14 @@ import javax.inject.Inject;
 public class GeocodingPresenter implements Presenter{
 
     private GeocodingView geocodingView;
+
     private final GetGeocodingResults getGeocodingResultsUseCase;
+    private final GeocodingResultModelDataMapper geocodingResultModelMapper;
 
     @Inject
-    public GeocodingPresenter(GetGeocodingResults getGeocodingUseCase) {
+    public GeocodingPresenter(GetGeocodingResults getGeocodingUseCase, GeocodingResultModelDataMapper geocodingResultModelMapper) {
         this.getGeocodingResultsUseCase = getGeocodingUseCase;
+        this.geocodingResultModelMapper = geocodingResultModelMapper;
     }
 
     public void setView(@NonNull GeocodingView geocodingView) {
@@ -77,10 +83,15 @@ public class GeocodingPresenter implements Presenter{
         this.getGeocodingResultsUseCase.execute(new GeocodingResultsObserver(), GetGeocodingResults.Params.forQuery(input));
     }
 
+    private void showGeocodingResultModelsInView(Collection<GeocodingResult> geocodingResults) {
+        final Collection<GeocodingResultModel> geocodingResultModels = geocodingResultModelMapper.transform(geocodingResults);
+        geocodingView.renderGeocodingResults(geocodingResultModels);
+    }
+
     private final class GeocodingResultsObserver extends DefaultObserver<List<GeocodingResult>> {
         @Override
-        public void onNext(List<GeocodingResult> placeTypes) {
-            //show
+        public void onNext(List<GeocodingResult> geocodingResults) {
+            showGeocodingResultModelsInView(geocodingResults);
         }
 
         @Override public void onComplete() {
