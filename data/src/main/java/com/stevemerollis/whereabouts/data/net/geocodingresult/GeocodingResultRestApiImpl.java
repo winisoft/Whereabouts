@@ -48,7 +48,7 @@ public class GeocodingResultRestApiImpl extends BaseApiImpl implements Geocoding
         formattedQuery = formattedQuery.substring(0, formattedQuery.length() -1);
 
         return MessageFormat.format(getContext().getString(R.string.geocoding_api_url), formattedQuery,
-                getContext().getString(R.string.geocoding_key));
+                "1234");
     }
 
     private String getGeocodingResults(String userQuery) throws MalformedURLException {
