@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class Place {
 
+    private double whatever;
     private double latitude;
     private double longitude;
     private String icon;

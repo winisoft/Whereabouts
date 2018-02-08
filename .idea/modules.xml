@@ -3,13 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Whereabouts.iml" filepath="$PROJECT_DIR$/Whereabouts.iml" />
-      <module fileurl="file://F:\AndroidStudioProjects\Whereabouts\Whereabouts.iml" filepath="F:\AndroidStudioProjects\Whereabouts\Whereabouts.iml" />
       <module fileurl="file://$PROJECT_DIR$/data/data.iml" filepath="$PROJECT_DIR$/data/data.iml" />
-      <module fileurl="file://F:\AndroidStudioProjects\Whereabouts\data\data.iml" filepath="F:\AndroidStudioProjects\Whereabouts\data\data.iml" />
       <module fileurl="file://$PROJECT_DIR$/domain/domain.iml" filepath="$PROJECT_DIR$/domain/domain.iml" />
-      <module fileurl="file://F:\AndroidStudioProjects\Whereabouts\domain\domain.iml" filepath="F:\AndroidStudioProjects\Whereabouts\domain\domain.iml" />
-      <module fileurl="file://$PROJECT_DIR$/presentation/presentation.iml" filepath="$PROJECT_DIR$/presentation/presentation.iml" />
-      <module fileurl="file://F:\AndroidStudioProjects\Whereabouts\presentation\presentation.iml" filepath="F:\AndroidStudioProjects\Whereabouts\presentation\presentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/presentation/presentatio.iml" filepath="$PROJECT_DIR$/presentation/presentation.iml" />
     </modules>
   </component>
 </project>

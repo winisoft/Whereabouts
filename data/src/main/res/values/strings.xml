@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">data</string>
     <string name="google_place_api_key">AIzaSyCpmBND9hihwkF6_qiWKNx4UDXLnsmSVwQ</string>
-    <string name="geocoding_key">fddddd</string>
+    <string name="geocoding_key">fdeeeffffffffffgg</string>
 
     <string name="geocoding_api_url">https://maps.googleapis.com/maps/api/geocode/json?address={0}&amp;key={1}</string>
 </resources>
