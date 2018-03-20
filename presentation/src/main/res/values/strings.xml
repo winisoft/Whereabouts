@@ -26,7 +26,7 @@
     <string name="spf_rb_visited_either_text">Either</string>
 
     <string name="google_place_key">AIzaSyCpmBND9hihwkF6_qiWKNx4UDXLnsmSVwQ</string>
-    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBXE7ycp1BbKydU3xX-acXmIjAPES0pyXc</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyCpmBND9hihwkF6_qiWKNx4UDXLnsmSVwQ</string>
 
     //Exception messages
     <string name="exception_message_generic">There was an application error</string>
